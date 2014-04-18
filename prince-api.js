@@ -99,6 +99,7 @@ function Prince (options) {
         binary:  "prince",
         prefix:  "",
         timeout: 10 * 1000,
+        cwd:     ".",
         option:  {},
         inputs:  [],
         output:  ""
@@ -150,6 +151,14 @@ Prince.prototype.timeout = function (timeout) {
     if (arguments.length !== 1)
         throw new Error("Prince#timeout: invalid number of arguments");
     this.config.timeout = timeout;
+    return this;
+};
+
+/*  set current working directory for CLI execution  */
+Prince.prototype.cwd = function (cwd) {
+    if (arguments.length !== 1)
+        throw new Error("Prince#cwd: invalid number of arguments");
+    this.config.cwd = cwd;
     return this;
 };
 
@@ -209,7 +218,10 @@ Prince.prototype._execute = function (method, args) {
     var self = this;
     return new promise(function (resolve, reject) {
         try {
-            child_process.execFile(prog, args, { timeout: self.config.timeout },
+            var options = {};
+            options.timeout = self.config.timeout;
+            options.cwd = self.config.cwd;
+            child_process.execFile(prog, args, options,
                 function (error, stdout, stderr) {
                     var m;
                     if (error === null && (m = stderr.match(/prince:\s+error:\s+([^\n]+)/)))

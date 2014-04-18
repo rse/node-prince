@@ -51,6 +51,10 @@ API
   The by default it is `10000` (10s).
   This returns the Prince API for further method chaining.
 
+- `Prince#cwd(dirname): Prince`: set the current working directory for execution.
+  The by default it is `.` (current working directory).
+  This returns the Prince API for further method chaining.
+
 - `Prince#inputs(filename): Prince`: set one (in case `filename` is a string)
    or multiple (in case `filename` is an array of strings) input XML/HTML files.
   This returns the Prince API for further method chaining.

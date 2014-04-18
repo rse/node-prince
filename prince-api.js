@@ -98,6 +98,7 @@ function Prince (options) {
     this.config = {
         binary:  "prince",
         prefix:  "",
+        license: "",
         timeout: 10 * 1000,
         cwd:     ".",
         option:  {},
@@ -143,6 +144,14 @@ Prince.prototype.prefix = function (prefix) {
     if (arguments.length !== 1)
         throw new Error("Prince#prefix: invalid number of arguments");
     this.config.prefix = prefix;
+    return this;
+};
+
+/*  set path to license file  */
+Prince.prototype.license = function (filename) {
+    if (arguments.length !== 1)
+        throw new Error("Prince#license: invalid number of arguments");
+    this.config.license = filename;
     return this;
 };
 
@@ -246,6 +255,10 @@ Prince.prototype.execute = function () {
     if (this.config.prefix !== "") {
         args.push("--prefix");
         args.push(this.config.prefix);
+    }
+    if (this.config.license !== "") {
+        args.push("--license-file");
+        args.push(this.config.license);
     }
     _.forOwn(this.config.option, function (value, name) {
         args.push("--" + name);

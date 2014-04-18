@@ -47,6 +47,11 @@ API
   found globally installed at the Node API installation time).
   This returns the Prince API for further method chaining.
 
+- `Prince#license(filename): Prince`: set the path to the PrinceXML
+  license file. This by default uses the path `license/license.dat`
+  under the PrinceXML installation.
+  This returns the Prince API for further method chaining.
+
 - `Prince#timeout(timeout): Prince`: set the execution timeout in milliseconds.
   The by default it is `10000` (10s).
   This returns the Prince API for further method chaining.

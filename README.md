@@ -1,8 +1,8 @@
 
-node-prince
+Node-Prince
 ===========
 
-Node API for executing PrinceXML via prince(1) CLI
+[Node](http://nodejs.org/) API for executing [PrinceXML](http://www.princexml.com/) via `prince` CLI.
 
 <p/>
 <img src="https://nodei.co/npm/node-prince.png?downloads=true&stars=true" alt=""/>
@@ -13,8 +13,8 @@ Node API for executing PrinceXML via prince(1) CLI
 Abstract
 --------
 
-This is a [Node](http://nodejs.org/) API for executing the PrinceXML
-CLI prince(1) from within JavaScript. The essential point of this Node
+This is a [Node](http://nodejs.org/) API for executing the [PrinceXML](http://www.princexml.com/)
+CLI `prince` from within JavaScript. The essential point of this Node
 extension is not primarily to just abstract away the CLI execution.
 Instead there are two other points: First, this Node extension provides
 a fixed dependency, as other Node extensions which require PrinceXML can

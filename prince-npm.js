@@ -97,14 +97,17 @@ var princeDownloadURL = function () {
 var downloadData = function (url) {
     return new promise(function (resolve, reject) {
         console.log("-- download: " + url);
-        var req = request({
+        var options = {
             method: "GET",
             url: url,
             encoding: null,
             headers: {
-                "User-Agent": "Node-NPM-Prince-install"
+                "User-Agent": "node-prince (prince-npm.js:install)"
             }
-        }, function (error, response, body) {
+        };
+        if (typeof process.env["http_proxy"] === "string" && process.env["http_proxy"] != "")
+            options.proxy = process.env["http_proxy"];
+        var req = request(options, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 console.log("-- download: " + body.length + " bytes received.");
                 resolve(body);

@@ -32,7 +32,7 @@ Installation
 Use the Node Package Manager (NPM) to install this module
 locally (default) or globally (with option `-g`):
 
-    $ npm install [-g] node-prince
+    $ npm install [-g] prince
 
 API
 ---

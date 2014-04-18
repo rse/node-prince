@@ -47,7 +47,7 @@ var rimraf        = require("rimraf");
 /*  determine path and version of prince(1)  */
 var princeInfo = function () {
     return new promise(function (resolve, reject) {
-        which("princex", function (error, filename) {
+        which("prince", function (error, filename) {
             if (error) {
                 reject("prince(1) not found in PATH: " + error);
                 return;
@@ -169,7 +169,7 @@ if (process.argv[2] === "install") {
             if (process.platform === "win32") {
                 destfile = path.join(__dirname, "prince.exe");
                 fs.writeFileSync(destfile, data, { encoding: null });
-                var args = [ "/s", "/a", "/v\"TARGETDIR=\\\"" + path.resolve(destdir) + "\\\" /qn\"" ];
+                var args = [ "/s", "/a", "/vTARGETDIR=\"" + path.resolve(destdir) + "\" /qn" ];
                 child_process.execFile(destfile, args, function (error /*, stdout, stderr */) {
                     if (error) {
                         console.log(chalk.red("** ERROR: failed to extract: " + error));

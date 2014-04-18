@@ -13,16 +13,18 @@ Node-Prince
 Abstract
 --------
 
-This is a [Node](http://nodejs.org/) API for executing the [PrinceXML](http://www.princexml.com/)
-CLI `prince` from within JavaScript. The essential point of this Node
-extension is not primarily to just abstract away the CLI execution.
-Instead there are two other points: First, this Node extension provides
-a fixed dependency, as other Node extensions which require PrinceXML can
-depend (via NPM) onto this extension. Second, as this Node extension can
--- across platforms -- automatically download, locally unpack and use a
-PrinceXML distribution, there is no need for any previously available
-global PrinceXML installation. Just depend on this Node extension and
-PrinceXML is available!
+This is a [Node](http://nodejs.org/) API for executing the
+[PrinceXML](http://www.princexml.com/) CLI `prince` from within
+JavaScript. The essential point of this Node extension is not primarily
+to just abstract away the asynchronous CLI execution. Instead there
+are two other major points: First, this Node extension provides a
+fixed dependency, as other Node extensions which require PrinceXML can
+just depend (via their NPM `package.json` file) onto this extension.
+Second, as this Node extension can &mdash; across platforms &mdash;
+automatically download, locally unpack and use a PrinceXML distribution,
+there is no need for any previously available global PrinceXML
+installation. Just depend on this Node extension and PrinceXML is
+available!
 
 Installation
 ------------

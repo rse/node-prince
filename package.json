@@ -2,7 +2,7 @@
     "name":        "prince",
     "homepage":    "http://github.com/rse/node-prince",
     "description": "Node API for executing PrinceXML via prince(1) CLI",
-    "version":     "0.9.0",
+    "version":     "0.9.1",
     "license":     "MIT",
     "author": {
         "name":    "Ralf S. Engelschall",
@@ -42,7 +42,7 @@
         "node":                 ">=0.8.0"
     },
     "scripts": {
-        "install":   "$NODE ./prince-npm.js install",
-        "uninstall": "$NODE ./prince-npm.js uninstall"
+        "install":   "node ./prince-npm.js install",
+        "uninstall": "node ./prince-npm.js uninstall"
     }
 }

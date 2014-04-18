@@ -27,15 +27,46 @@ locally (default) or globally (with option `-g`):
 API
 ---
 
-- `Prince(options)`:
+- `Prince([options]): Prince`: constructor for the API. Call this once
+  for every XML/HTML to PDF conversion process.
+  This returns the Prince API for further method chaining.
 
-- `Prince#binary(binary)`:
-- `Prince#prefix(prefix)`:
-- `Prince#timeout(timeout)`:
-- `Prince#inputs(filename)`:
-- `Prince#output(filename)`:
-- `Prince#option(name, value, forced)`:
-- `Prince#execute()`:
+- `Prince#binary(binary): Prince`: set the path to the prince(1) binary.
+  By default it is `prince` (in case PrinceXML was found globally
+  installed at the Node API installation time) or the path to the
+  `prince` binary of the locally installed PrinceXML distribution (in
+  case PrinceXML was not found globally installed at the Node API
+  installation time).
+  This returns the Prince API for further method chaining.
+
+- `Prince#prefix(prefix): Prince`: set the path to the PrinceXML
+  installation. This by default is either empty
+  (in case PrinceXML was found globally
+  installed at the Node API installation time) or the path to the
+  locally installed PrinceXML distribution (in case PrinceXML was not
+  found globally installed at the Node API installation time).
+  This returns the Prince API for further method chaining.
+
+- `Prince#timeout(timeout): Prince`: set the execution timeout in milliseconds.
+  The by default it is `10000` (10s).
+  This returns the Prince API for further method chaining.
+
+- `Prince#inputs(filename): Prince`: set one (in case `filename` is a string)
+   or multiple (in case `filename` is an array of strings) input XML/HTML files.
+  This returns the Prince API for further method chaining.
+
+- `Prince#output(filename): Prince`: set the output PDF file.
+  This returns the Prince API for further method chaining.
+
+- `Prince#option(name, value[, forced]): Prince`: set a PrinceXML option
+  name `name` to a value `value`. The API knows the officially supported
+  options of PrinceXML 9.0 and by default rejects unknown options.
+  But arbitrary options can be passed by setting `forced` to `true`
+  in case a different PrinceXML version should be used. This returns
+  the Prince API for further method chaining.
+
+- `Prince#execute(): Promise`: asynchronously execute the conversion
+  process. This returns a promise.
 
 License
 -------

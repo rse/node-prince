@@ -13,8 +13,16 @@ Node API for executing PrinceXML via prince(1) CLI
 Abstract
 --------
 
-This is a [Node.js](http://nodejs.org/) API for integrating the
-PrinceXML CLI prince(1) into JavaScript.
+This is a [Node](http://nodejs.org/) API for executing the PrinceXML
+CLI prince(1) from within JavaScript. The essential point of this Node
+extension is not primarily to just abstract away the CLI execution.
+Instead there are two other points: First, this Node extension provides
+a fixed dependency, as other Node extensions which require PrinceXML can
+depend (via NPM) onto this extension. Second, as this Node extension can
+-- across platforms -- automatically download, locally unpack and use a
+PrinceXML distribution, there is no need for any previously available
+global PrinceXML installation. Just depend on this Node extension and
+PrinceXML is available!
 
 Installation
 ------------

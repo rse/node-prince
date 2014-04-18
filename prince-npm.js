@@ -164,10 +164,11 @@ if (process.argv[2] === "install") {
         var url = princeDownloadURL();
         downloadData(url).then(function (data) {
             console.log("++ locally unpacking PrinceXML distribution");
-            var destfile = path.join(__dirname, "prince.tgz");
             destdir = path.join(__dirname, "prince");
-            fs.writeFileSync(destfile, data, { encoding: null });
+            var destfile;
             if (process.platform === "win32") {
+                destfile = path.join(__dirname, "prince.exe");
+                fs.writeFileSync(destfile, data, { encoding: null });
                 var args = [ "/s", "/a", "/v\"TARGETDIR=\\\"" + path.resolve(destdir) + "\\\" /qn\"" ];
                 child_process.execFile(destfile, args, function (error /*, stdout, stderr */) {
                     if (error) {
@@ -180,6 +181,8 @@ if (process.argv[2] === "install") {
                 });
             }
             else {
+                destfile = path.join(__dirname, "prince.tgz");
+                fs.writeFileSync(destfile, data, { encoding: null });
                 extractTarball(destfile, destdir, 1).then(function () {
                     fs.unlinkSync(destfile);
                     console.log("-- OK: local PrinceXML installation now available");

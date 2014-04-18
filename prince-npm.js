@@ -105,8 +105,8 @@ var downloadData = function (url) {
                 "User-Agent": "node-prince (prince-npm.js:install)"
             }
         };
-        if (typeof process.env["http_proxy"] === "string" && process.env["http_proxy"] != "")
-            options.proxy = process.env["http_proxy"];
+        if (typeof process.env.http_proxy === "string" && process.env.http_proxy !== "")
+            options.proxy = process.env.http_proxy;
         var req = request(options, function (error, response, body) {
             if (!error && response.statusCode === 200) {
                 console.log("-- download: " + body.length + " bytes received.");
@@ -167,12 +167,26 @@ if (process.argv[2] === "install") {
             var destfile = path.join(__dirname, "prince.tgz");
             destdir = path.join(__dirname, "prince");
             fs.writeFileSync(destfile, data, { encoding: null });
-            extractTarball(destfile, destdir, 1).then(function () {
-                fs.unlinkSync(destfile);
-                console.log("-- OK: local PrinceXML installation now available");
-            }, function (error) {
-                console.log(chalk.red("** ERROR: failed to extract: " + error));
-            });
+            if (process.platform === "win32") {
+                var args = [ "/s", "/a", "/v\"TARGETDIR=\\\"" + path.resolve(destdir) + "\\\" /qn\"" ];
+                child_process.execFile(destfile, args, function (error /*, stdout, stderr */) {
+                    if (error) {
+                        console.log(chalk.red("** ERROR: failed to extract: " + error));
+                    }
+                    else {
+                        fs.unlinkSync(destfile);
+                        console.log("-- OK: local PrinceXML installation now available");
+                    }
+                });
+            }
+            else {
+                extractTarball(destfile, destdir, 1).then(function () {
+                    fs.unlinkSync(destfile);
+                    console.log("-- OK: local PrinceXML installation now available");
+                }, function (error) {
+                    console.log(chalk.red("** ERROR: failed to extract: " + error));
+                });
+            }
         }, function (error) {
             console.log(chalk.red("** ERROR: failed to download: " + error));
         });

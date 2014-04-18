@@ -107,11 +107,20 @@ function Prince (options) {
     };
 
     /*  override defaults with more reasonable information about environment  */
-    var local_basedir = path.resolve(path.join(__dirname, "prince/lib/prince"));
-    var local_binary  = path.join(local_basedir, "bin/prince");
-    if (fs.existsSync(local_binary)) {
-        this.binary(local_binary);
-        this.prefix(local_basedir);
+    var install = [
+        { basedir: "prince/lib/prince",                     binary: "bin/prince"      },
+        { basedir: "prince\\program files\\Prince\\Engine", binary: "bin\\prince.exe" }
+    ];
+    var basedir;
+    var binary;
+    for (var i = 0; i < install.length; i++) {
+        basedir = path.resolve(path.join(__dirname, install[i].basedir));
+        binary  = path.join(basedir, install[i].binary);
+        if (fs.existsSync(binary)) {
+            this.binary(binary);
+            this.prefix(basedir);
+            break;
+        }
     }
 
     /*  allow caller to override defaults  */

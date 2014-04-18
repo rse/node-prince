@@ -34,6 +34,23 @@ locally (default) or globally (with option `-g`):
 
     $ npm install [-g] prince
 
+Usage
+-----
+
+```js
+var Prince = require("prince");
+
+Prince()
+    .inputs("test.html")
+    .output("test.pdf")
+    .execute()
+    .then(function () {
+        console.log("OK: done");
+    }, function (error) {
+        console.log("ERROR: ", util.inspect(error));
+    })
+```
+
 API
 ---
 

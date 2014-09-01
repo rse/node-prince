@@ -53,6 +53,7 @@ module.exports = function (grunt) {
             }
         },
         clean: {
+            clean: [],
             distclean: [ "node_modules" ]
         }
     });

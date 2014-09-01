@@ -24,6 +24,9 @@
 
 /* global process: false */
 /* global __dirname: false */
+/* global require: false */
+/* global console: false */
+/* eslint no-console: 0 */
 
 /*
  *  prince-npm.js: NPM install-time integration
@@ -71,7 +74,7 @@ var princeInfo = function () {
 /*  return download URL for latest PrinceXML distribution  */
 var princeDownloadURL = function () {
     var vendor = {
-        version: "9.0r4",
+        version: "9.0r5",
         download: {
             "ia32-win32":   "http://www.princexml.com/download/prince-@V@-setup.exe",
             "x64-win32":    "http://www.princexml.com/download/prince-@V@-setup.exe",

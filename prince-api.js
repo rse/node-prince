@@ -24,6 +24,8 @@
 
 /* global __dirname: false */
 /* global process: false */
+/* global module: false */
+/* global require: false */
 
 /*
  *  prince-api.js: Node run-time API

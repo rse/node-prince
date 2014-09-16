@@ -220,7 +220,8 @@ Prince.prototype._execute = function (method, args) {
     var prog = this.config.binary;
     if (!fs.existsSync(prog)) {
         var findInPath = function (name) {
-            var p = process.env.PATH.split(":").map(function(item) {
+        	var pathSeparator = process.platform === 'win32' ? ";" : ":";
+            var p = process.env.PATH.split(pathSeparator).map(function(item) {
                 return path.join(item, name);
             });
             for (var i = 0, len = p.length; i < len; i++)

@@ -104,6 +104,11 @@ API
 - `Prince#execute(): Promise`: asynchronously execute the conversion
   process. This returns a promise.
 
+See Also
+--------
+
+Companion Grunt task [grunt-princess](https://github.com/rse/grunt-princess)
+
 License
 -------
 

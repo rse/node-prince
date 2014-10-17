@@ -2,7 +2,7 @@
     "name":        "prince",
     "homepage":    "http://github.com/rse/node-prince",
     "description": "Node API for executing PrinceXML via prince(1) CLI",
-    "version":     "0.9.8",
+    "version":     "0.9.9",
     "license":     "MIT",
     "author": {
         "name":    "Ralf S. Engelschall",
@@ -26,13 +26,13 @@
         "grunt-contrib-jshint": "~0.10.0",
         "grunt-contrib-clean":  "~0.6.0",
         "grunt-eslint":         "~1.1.0",
-        "grunt-mocha-test":     "~0.12.0"
+        "grunt-mocha-test":     "~0.12.1"
     },
     "dependencies" : {
-        "promise":              "~6.0.0",
+        "promise":              "~6.0.1",
         "lodash":               "~2.4.1",
         "progress":             "~1.1.8",
-        "request":              "~2.44.0",
+        "request":              "~2.45.0",
         "which":                "~1.0.5",
         "chalk":                "~0.5.1",
         "tar":                  "~1.0.1",

@@ -171,9 +171,15 @@ if (process.argv[2] === "install") {
                 fs.writeFileSync(destfile, data, { encoding: null });
                 var args = [ "/s", "/a", "/vTARGETDIR=\"" + path.resolve(destdir) + "\" /qn" ];
                 child_process.execFile(destfile, args, function (error, stdout, stderr) {
-                    if (error)
-                        console.log(chalk.red("** ERROR: failed to extract: " + error +
-                            " (stdout: " + stdout + ", stderr: " + stderr + ")"));
+                    if (error) {
+                        console.log(chalk.red("** ERROR: failed to extract: " + error));
+                        stdout = stdout.toString();
+                        stderr = stderr.toString();
+                        if (stdout !== "")
+                            console.log("** STDOUT: " + stdout);
+                        if (stderr !== "")
+                            console.log("** STDERR: " + stderr);
+                    }
                     else {
                         fs.unlinkSync(destfile);
                         console.log("-- OK: local PrinceXML installation now available");

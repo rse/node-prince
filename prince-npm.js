@@ -122,10 +122,7 @@ var downloadData = function (url) {
         req.on("response", function (response) {
             var len = parseInt(response.headers["content-length"], 10);
             progress_bar = new progress(
-                "-- download: " +
-                "[" + chalk.blue(":bar") + "] " +
-                chalk.blue(":percent") +
-                " (ETA: " + chalk.blue(":eta") + "s)", {
+                "-- download: [:bar] :percent (ETA: :etas)", {
                 complete:   "#",
                 incomplete: "=",
                 width:      40,

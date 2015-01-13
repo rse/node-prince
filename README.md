@@ -34,6 +34,11 @@ locally (default) or globally (with option `-g`):
 
     $ npm install [-g] prince
 
+ATTENTION: In case you are behind a corporate firewall, you usually
+have to configure your corporate proxy before installing this module.
+For this, set the environment variable `http_proxy` to e.g. the value
+`http://proxy.example:3128`.
+
 Usage
 -----
 

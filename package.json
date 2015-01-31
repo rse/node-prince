@@ -1,8 +1,8 @@
 {
     "name":        "prince",
     "homepage":    "http://github.com/rse/node-prince",
-    "description": "Node API for executing PrinceXML via prince(1) CLI",
-    "version":     "1.0.1",
+    "description": "Node API for executing XML/HTML to PDF renderer PrinceXML via prince(1) CLI",
+    "version":     "1.0.2",
     "license":     "MIT",
     "author": {
         "name":    "Ralf S. Engelschall",
@@ -10,7 +10,7 @@
         "url":     "http://engelschall.com"
     },
     "keywords": [
-        "Prince", "PrinceXML", "CLI", "XML", "HTML", "PDF", "API"
+        "Prince", "PrinceXML", "CLI", "XML", "HTML", "PDF", "renderer", "API"
     ],
     "repository": {
         "type": "git",

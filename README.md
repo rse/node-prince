@@ -2,7 +2,8 @@
 Node-Prince
 ===========
 
-[Node](http://nodejs.org/) API for executing [PrinceXML](http://www.princexml.com/) via `prince` CLI.
+[Node](http://nodejs.org/) API for executing the XML/HTML to PDF renderer
+[PrinceXML](http://www.princexml.com/) via `prince` CLI.
 
 <p/>
 <img src="https://nodei.co/npm/node-prince.png?downloads=true&stars=true" alt=""/>
@@ -14,7 +15,7 @@ Abstract
 --------
 
 This is a [Node](http://nodejs.org/) API for executing the
-[PrinceXML](http://www.princexml.com/) CLI `prince` from within
+XML/HTML to PDF renderer [PrinceXML](http://www.princexml.com/) CLI `prince` from within
 JavaScript. The essential point of this Node extension is not primarily
 to just abstract away the asynchronous CLI execution. Instead there
 are two other major points: First, this Node extension provides a

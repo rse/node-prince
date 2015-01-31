@@ -2,7 +2,7 @@
     "name":        "prince",
     "homepage":    "http://github.com/rse/node-prince",
     "description": "Node API for executing PrinceXML via prince(1) CLI",
-    "version":     "1.0.0",
+    "version":     "1.0.1",
     "license":     "MIT",
     "author": {
         "name":    "Ralf S. Engelschall",

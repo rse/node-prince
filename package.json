@@ -25,14 +25,14 @@
         "grunt-cli":            "~0.1.13",
         "grunt-contrib-jshint": "~0.11.0",
         "grunt-contrib-clean":  "~0.6.0",
-        "grunt-eslint":         "~5.1.0",
+        "grunt-eslint":         "~6.0.0",
         "grunt-mocha-test":     "~0.12.7"
     },
     "dependencies" : {
         "promise":              "~6.1.0",
-        "lodash":               "~3.0.1",
+        "lodash":               "~3.3.0",
         "progress":             "~1.1.8",
-        "request":              "~2.51.0",
+        "request":              "~2.53.0",
         "which":                "~1.0.8",
         "chalk":                "~0.5.1",
         "tar":                  "~1.0.3",

@@ -50,7 +50,7 @@ var rimraf        = require("rimraf");
 /*  determine path and version of prince(1)  */
 var princeInfo = function () {
     return new promise(function (resolve, reject) {
-        which("princex", function (error, filename) {
+        which("prince", function (error, filename) {
             if (error) {
                 reject("prince(1) not found in PATH: " + error);
                 return;

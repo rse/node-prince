@@ -46,11 +46,12 @@ var which         = require("which");
 var chalk         = require("chalk");
 var tar           = require("tar");
 var rimraf        = require("rimraf");
+var sh            = require("sh");
 
 /*  determine path and version of prince(1)  */
 var princeInfo = function () {
     return new promise(function (resolve, reject) {
-        which("prince", function (error, filename) {
+        which("princex", function (error, filename) {
             if (error) {
                 reject("prince(1) not found in PATH: " + error);
                 return;
@@ -99,7 +100,6 @@ var princeDownloadURL = function () {
 /*  download data from URL  */
 var downloadData = function (url) {
     return new promise(function (resolve, reject) {
-        console.log("-- download: " + url);
         var options = {
             method: "GET",
             url: url,
@@ -108,30 +108,47 @@ var downloadData = function (url) {
                 "User-Agent": "node-prince (prince-npm.js:install)"
             }
         };
-        if (typeof process.env.http_proxy === "string" && process.env.http_proxy !== "")
-            options.proxy = process.env.http_proxy;
-        var req = request(options, function (error, response, body) {
-            if (!error && response.statusCode === 200) {
-                console.log("-- download: " + body.length + " bytes received.");
-                resolve(body);
+        (new promise(function (resolve /*, reject  */) {
+            if (typeof process.env.http_proxy === "string" && process.env.http_proxy !== "") {
+                options.proxy = process.env.http_proxy;
+                console.log("-- using proxy ($http_proxy): " + options.proxy);
+                resolve();
             }
-            else
-                reject("download failed: " + error);
-        });
-        var progress_bar = null;
-        req.on("response", function (response) {
-            var len = parseInt(response.headers["content-length"], 10);
-            progress_bar = new progress(
-                "-- download: [:bar] :percent (ETA: :etas)", {
-                complete:   "#",
-                incomplete: "=",
-                width:      40,
-                total:      len
+            else {
+                sh("npm config get proxy").result(function(output) {
+                    output = output.replace(/\r?\n$/, "");
+                    if (output !== "null" && output !== "undefined") {
+                        options.proxy = output;
+                        console.log("-- using proxy (npm config get proxy): " + options.proxy);
+                    }
+                    resolve();
+                });
+            }
+        })).then(function () {
+            console.log("-- download: " + url);
+            var req = request(options, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    console.log("-- download: " + body.length + " bytes received.");
+                    resolve(body);
+                }
+                else
+                    reject("download failed: " + error);
             });
-        });
-        req.on("data", function (data) {
-            if (progress_bar !== null)
-                progress_bar.tick(data.length);
+            var progress_bar = null;
+            req.on("response", function (response) {
+                var len = parseInt(response.headers["content-length"], 10);
+                progress_bar = new progress(
+                    "-- download: [:bar] :percent (ETA: :etas)", {
+                    complete:   "#",
+                    incomplete: "=",
+                    width:      40,
+                    total:      len
+                });
+            });
+            req.on("data", function (data) {
+                if (progress_bar !== null)
+                    progress_bar.tick(data.length);
+            });
         });
     });
 };

@@ -37,8 +37,8 @@ locally (default) or globally (with option `-g`):
 
 ATTENTION: In case you are behind a corporate firewall, you usually
 have to configure your corporate proxy before installing this module.
-For this, set the environment variable `http_proxy` to e.g. the value
-`http://proxy.example:3128`.
+For this, either configure the proxy inside NPM (e.g. `npm config set proxy http://proxy.example.com:3128`)
+or alternatively set the environment variable `http_proxy` (e.g. `export http_proxy=http://proxy.example.com:3128`).
 
 Usage
 -----

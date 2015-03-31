@@ -46,7 +46,7 @@ var which         = require("which");
 var chalk         = require("chalk");
 var tar           = require("tar");
 var rimraf        = require("rimraf");
-var sh            = require("sh");
+var exec          = require("child_process").exec;
 
 /*  determine path and version of prince(1)  */
 var princeInfo = function () {
@@ -115,10 +115,10 @@ var downloadData = function (url) {
                 resolve();
             }
             else {
-                sh("npm config get proxy").result(function(output) {
-                    output = output.replace(/\r?\n$/, "");
-                    if (output !== "null" && output !== "undefined") {
-                        options.proxy = output;
+                exec("npm config get proxy", function (err, stdout, stderr) {
+                    stdout = stdout.replace(/\r?\n$/, "");
+                    if (stdout.match(/^https?:\/\//)) {
+                        options.proxy = stdout;
                         console.log("-- using proxy (npm config get proxy): " + options.proxy);
                     }
                     resolve();

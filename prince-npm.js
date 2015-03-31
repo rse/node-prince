@@ -116,7 +116,7 @@ var downloadData = function (url) {
             else {
                 child_process.exec("npm config get proxy", function (error, stdout /*, stderr */) {
                     if (error === null) {
-                        stdout = stdout.replace(/\r?\n$/, "");
+                        stdout = stdout.toString().replace(/\r?\n$/, "");
                         if (stdout.match(/^https?:\/\/.+/)) {
                             options.proxy = stdout;
                             console.log("-- using proxy (npm config get proxy): " + options.proxy);

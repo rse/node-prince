@@ -46,7 +46,6 @@ var which         = require("which");
 var chalk         = require("chalk");
 var tar           = require("tar");
 var rimraf        = require("rimraf");
-var exec          = require("child_process").exec;
 
 /*  determine path and version of prince(1)  */
 var princeInfo = function () {
@@ -57,7 +56,7 @@ var princeInfo = function () {
                 return;
             }
             child_process.execFile(filename, [ "--version" ], function (error, stdout, stderr) {
-                if (error) {
+                if (error !== null) {
                     reject("prince(1) failed on \"--version\": " + error);
                     return;
                 }
@@ -115,11 +114,13 @@ var downloadData = function (url) {
                 resolve();
             }
             else {
-                exec("npm config get proxy", function (err, stdout, stderr) {
-                    stdout = stdout.replace(/\r?\n$/, "");
-                    if (stdout.match(/^https?:\/\//)) {
-                        options.proxy = stdout;
-                        console.log("-- using proxy (npm config get proxy): " + options.proxy);
+                child_process.exec("npm config get proxy", function (error, stdout /*, stderr */) {
+                    if (error === null) {
+                        stdout = stdout.replace(/\r?\n$/, "");
+                        if (stdout.match(/^https?:\/\/.+/)) {
+                            options.proxy = stdout;
+                            console.log("-- using proxy (npm config get proxy): " + options.proxy);
+                        }
                     }
                     resolve();
                 });
@@ -188,7 +189,7 @@ if (process.argv[2] === "install") {
                 fs.writeFileSync(destfile, data, { encoding: null });
                 var args = [ "/s", "/a", "/vTARGETDIR=\"" + path.resolve(destdir) + "\" /qn" ];
                 child_process.execFile(destfile, args, function (error, stdout, stderr) {
-                    if (error) {
+                    if (error !== null) {
                         console.log(chalk.red("** ERROR: failed to extract: " + error));
                         stdout = stdout.toString();
                         stderr = stderr.toString();

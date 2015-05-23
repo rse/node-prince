@@ -85,7 +85,7 @@ var princeDownloadURL = function () {
                     console.log("ERROR: failed to determine platform details on platform \"" + id + "\"");
                     process.exit(1);
                 }
-                var platform = stdout.toString().replace(/^(\S+).*$/, "$1");
+                var platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1");
                 if (id.match(/^(?:ia32|x64)-linux/)) {
                     if (platform.match(/^ix86-ubuntu1[01](?:\.\d+)*$/))
                         resolve("http://www.princexml.com/download/prince-10-ubuntu10.04-amd64.tar.gz");

@@ -88,17 +88,17 @@ var princeDownloadURL = function () {
                 var platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1");
                 if (id.match(/^(?:ia32|x64)-linux/)) {
                     if (platform.match(/^ix86-ubuntu1[01](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10-ubuntu10.04-amd64.tar.gz");
-                    else if (platform.match(/^amd64-ubuntu1[01](?:\.\d+)*$/))
                         resolve("http://www.princexml.com/download/prince-10-ubuntu10.04-i386.tar.gz");
+                    else if (platform.match(/^amd64-ubuntu1[01](?:\.\d+)*$/))
+                        resolve("http://www.princexml.com/download/prince-10-ubuntu10.04-amd64.tar.gz");
                     else if (platform.match(/^ix86-ubuntu1[23](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10-ubuntu12.04-amd64.tar.gz");
-                    else if (platform.match(/^amd64-ubuntu1[23](?:\.\d+)*$/))
                         resolve("http://www.princexml.com/download/prince-10-ubuntu12.04-i386.tar.gz");
+                    else if (platform.match(/^amd64-ubuntu1[23](?:\.\d+)*$/))
+                        resolve("http://www.princexml.com/download/prince-10-ubuntu12.04-amd64.tar.gz");
                     else if (platform.match(/^ix86-ubuntu1[45](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10-ubuntu14.04-amd64.tar.gz");
-                    else if (platform.match(/^amd64-ubuntu1[45](?:\.\d+)*$/))
                         resolve("http://www.princexml.com/download/prince-10-ubuntu14.04-i386.tar.gz");
+                    else if (platform.match(/^amd64-ubuntu1[45](?:\.\d+)*$/))
+                        resolve("http://www.princexml.com/download/prince-10-ubuntu14.04-amd64.tar.gz");
                     else if (platform.match(/^amd64-debian8(?:\.\d+)*$/))
                         resolve("http://www.princexml.com/download/prince-10-debian8.0-amd64.tar.gz");
                     else if (platform.match(/^amd64-debian7(?:\.\d+)*$/))

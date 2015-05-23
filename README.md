@@ -40,6 +40,15 @@ have to configure your corporate proxy before installing this module.
 For this, either configure the proxy inside NPM (e.g. `npm config set proxy http://proxy.example.com:3128`)
 or alternatively set the environment variable `http_proxy` (e.g. `export http_proxy=http://proxy.example.com:3128`).
 
+NOTICE: PrinceXML provides just distribution-specific and dynamically
+linked Linux binaries. The Node-Prince installation procedure tries to
+detect your particular distribution on `npm install [-g] prince` and
+downloads the corresponding binary. But because of the dynamic linking
+of PrinceXML binaries, it still can be that you first have to install
+some distribution-specific system dependencies. For instance, under
+Debian 8.0 you first have to install the necessary system packages with
+`apt-get install nodejs nodejs-legacy npm libgif4 curl`.
+
 Usage
 -----
 

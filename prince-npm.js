@@ -60,7 +60,7 @@ var princeInfo = function () {
                     reject("prince(1) failed on \"--version\": " + error);
                     return;
                 }
-                var m = stdout.match(/^Prince\s+(\d+\.\d+)/);
+                var m = stdout.match(/^Prince\s+(\d+(?:\.\d+)?)/);
                 if (!(m !== null && typeof m[1] !== "undefined")) {
                     reject("prince(1) returned unexpected output on \"--version\":\n" + stdout + stderr);
                     return;

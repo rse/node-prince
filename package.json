@@ -23,20 +23,20 @@
     "devDependencies": {
         "grunt":                "~0.4.5",
         "grunt-cli":            "~0.1.13",
-        "grunt-contrib-jshint": "~0.11.1",
+        "grunt-contrib-jshint": "~0.11.2",
         "grunt-contrib-clean":  "~0.6.0",
-        "grunt-eslint":         "~10.0.0",
+        "grunt-eslint":         "~16.0.0",
         "grunt-mocha-test":     "~0.12.7"
     },
     "dependencies" : {
-        "promise":              "~6.1.0",
-        "lodash":               "~3.6.0",
+        "promise":              "~7.0.3",
+        "lodash":               "~3.10.0",
         "progress":             "~1.1.8",
-        "request":              "~2.54.0",
-        "which":                "~1.0.9",
-        "chalk":                "~1.0.0",
-        "tar":                  "~2.0.0",
-        "rimraf":               "~2.3.2"
+        "request":              "~2.60.0",
+        "which":                "~1.1.1",
+        "chalk":                "~1.1.0",
+        "tar":                  "~2.1.1",
+        "rimraf":               "~2.4.2"
     },
     "engines": {
         "node":                 ">=0.10.0"

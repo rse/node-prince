@@ -6,7 +6,7 @@ Node-Prince
 [PrinceXML](http://www.princexml.com/) via `prince` CLI.
 
 <p/>
-<img src="https://nodei.co/npm/node-prince.png?downloads=true&stars=true" alt=""/>
+<img src="https://nodei.co/npm/prince.png?downloads=true&stars=true" alt=""/>
 
 <p/>
 <img src="https://david-dm.org/rse/node-prince.png" alt=""/>

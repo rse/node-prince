@@ -25,9 +25,7 @@
         "grunt-cli":            "~1.1.0",
         "grunt-contrib-jshint": "~1.0.0",
         "grunt-contrib-clean":  "~1.0.0",
-        "grunt-eslint":         "~18.0.0",
-        "grunt-mocha-test":     "~0.12.7",
-        "mocha":                "~2.4.5"
+        "grunt-eslint":         "~18.0.0"
     },
     "dependencies" : {
         "promise":              "~7.1.1",

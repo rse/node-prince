@@ -27,7 +27,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-eslint");
-    grunt.loadNpmTasks("grunt-mocha-test");
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
@@ -44,20 +43,12 @@ module.exports = function (grunt) {
             },
             target: [ "prince-api.js", "prince-npm.js" ],
         },
-        mochaTest: {
-            "prince": {
-                src: [ "prince-test.js" ]
-            },
-            options: {
-                reporter: "spec"
-            }
-        },
         clean: {
             clean: [],
             distclean: [ "node_modules" ]
         }
     });
 
-    grunt.registerTask("default", [ "jshint", "eslint", "mochaTest" ]);
+    grunt.registerTask("default", [ "jshint", "eslint" ]);
 };
 

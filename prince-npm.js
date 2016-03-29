@@ -76,9 +76,9 @@ var princeDownloadURL = function () {
     return new promise(function (resolve /*, reject */) {
         var id = process.arch + "-" + process.platform;
         if (id.match(/^(?:ia32|x64)-win32$/))
-            resolve("http://www.princexml.com/download/prince-10r6-setup.exe");
+            resolve("http://www.princexml.com/download/prince-10r7-setup.exe");
         else if (id.match(/^(?:ia32|x64)-darwin/))
-            resolve("http://www.princexml.com/download/prince-10r6-macosx.tar.gz");
+            resolve("http://www.princexml.com/download/prince-10r7-macosx.tar.gz");
         else {
             child_process.exec("sh " + __dirname + "/shtool platform -t binary", function (error, stdout /*, stderr */) {
                 if (error) {
@@ -88,48 +88,48 @@ var princeDownloadURL = function () {
                 var platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1");
                 if (id.match(/^(?:ia32|x64)-linux/)) {
                     if (platform.match(/^ix86-ubuntu1[01](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-ubuntu10.04-i386.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-ubuntu10.04-i386.tar.gz");
                     else if (platform.match(/^amd64-ubuntu1[01](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-ubuntu10.04-amd64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-ubuntu10.04-amd64.tar.gz");
                     else if (platform.match(/^ix86-ubuntu1[23](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-ubuntu12.04-i386.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-ubuntu12.04-i386.tar.gz");
                     else if (platform.match(/^amd64-ubuntu1[23](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-ubuntu12.04-amd64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-ubuntu12.04-amd64.tar.gz");
                     else if (platform.match(/^ix86-ubuntu1[45](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-ubuntu14.04-i386.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-ubuntu14.04-i386.tar.gz");
                     else if (platform.match(/^amd64-ubuntu1[45](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-ubuntu14.04-amd64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-ubuntu14.04-amd64.tar.gz");
                     else if (platform.match(/^amd64-debian8(?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-debian8.0-amd64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-debian8.0-amd64.tar.gz");
                     else if (platform.match(/^amd64-debian7(?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-debian7.4-amd64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-debian7.4-amd64.tar.gz");
                     else if (platform.match(/^amd64-centos7(?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-centos7-x86_64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-centos7-x86_64.tar.gz");
                     else if (platform.match(/^amd64-centos6(?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-centos6-x86_64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-centos6-x86_64.tar.gz");
                     else if (platform.match(/^ix86-centos6(?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-centos6-i386.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-centos6-i386.tar.gz");
                     else if (platform.match(/^amd64-centos5(?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-centos5-x86_64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-centos5-x86_64.tar.gz");
                     else if (platform.match(/^ix86-centos5(?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-centos5-i386.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-centos5-i386.tar.gz");
                     else if (platform.match(/^amd64-suse13(?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-opensuse13.2-x86_64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-opensuse13.2-x86_64.tar.gz");
                     else if (platform.match(/^amd64-suse1[12](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-opensuse11-x86_64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-opensuse11-x86_64.tar.gz");
                     else if (platform.match(/^ix86-suse1[12](?:\.\d+)*$/))
-                        resolve("http://www.princexml.com/download/prince-10r6-opensuse11-i586.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-opensuse11-i586.tar.gz");
                     else if (id.match(/^ia32-/))
-                        resolve("http://www.princexml.com/download/prince-10r6-linux-generic-i686.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-linux-generic-i686.tar.gz");
                     else if (id.match(/^x64-/))
-                        resolve("http://www.princexml.com/download/prince-10r6-linux-generic-x86_64.tar.gz");
+                        resolve("http://www.princexml.com/download/prince-10r7-linux-generic-x86_64.tar.gz");
                 }
                 else if (id.match(/^ia32-freebsd/))
-                    resolve("http://www.princexml.com/download/prince-10r6-freebsd10.1-i386-static.tar.gz");
+                    resolve("http://www.princexml.com/download/prince-10r7-freebsd10.1-i386-static.tar.gz");
                 else if (id.match(/^x64-freebsd/))
-                    resolve("http://www.princexml.com/download/prince-10r6-freebsd10.1-amd64-static.tar.gz");
+                    resolve("http://www.princexml.com/download/prince-10r7-freebsd10.1-amd64-static.tar.gz");
                 else if (id.match(/^(?:ia32|x64)-sunos/)) {
-                    resolve("http://www.princexml.com/download/prince-10r6-sol11x86.tar.gz");
+                    resolve("http://www.princexml.com/download/prince-10r7-sol11x86.tar.gz");
                 }
                 else {
                     console.log("ERROR: PrinceXML not available for platform \"" + platform + "\"");

@@ -87,7 +87,9 @@ var princeOptions = {
     "disallow-copy":     false,
     "disallow-annotate": false,
     "disallow-modify":   false,
-    "scanfonts":         false
+    "scanfonts":         false,
+    "structured-log":    false,
+    "debug":             false
 };
 
 /*  API constructor  */

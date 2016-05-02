@@ -222,9 +222,10 @@ Prince.prototype.option = function (name, value, forced) {
 
 /*  register event handlers  */
 Prince.prototype.on = function (eventName, fn) {
-    if (Object.keys(this.eventHandlers).indexOf(eventName) === -1) {
+    var eventNames = Object.keys(this.eventHandlers);
+    if (eventNames.indexOf(eventName) === -1) {
         throw new Error("Unknown event name. Event must be one of '"
-          + Object.keys(this.eventHandlers).join("', '") + "'");
+          + eventNames.join("', '") + "'");
     }
     var alreadyAdded = this.eventHandlers[eventName].indexOf(fn) > -1
     if (!alreadyAdded) {

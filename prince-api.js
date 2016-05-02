@@ -267,19 +267,19 @@ Prince.prototype._execute = function (method, args) {
             var stdoutHandlers = self.eventHandlers.filter(function(eventHandler) { return eventHandler.eventName === 'stdout' })
             var stderrHandlers = self.eventHandlers.filter(function(eventHandler) { return eventHandler.eventName === 'stderr' })
 
-            function stdParse(handler) {
+            function handleData(handler) {
               (""+this.data).split('\n').map(function(line) {
-                handler.fn(line)
+                handler.fn(line);
               })
             };
 
             princeProcess.stdout.on("data", function(data) {
-              stdoutHandlers.map(stdParse.bind({data: data}))
+              stdoutHandlers.map(handleData.bind({data: data}));
               _stdout += data;
             });
 
             princeProcess.stderr.on("data", function(data) {
-              stderrHandlers.map(stdParse.bind({data: data}))
+              stderrHandlers.map(handleData.bind({data: data}));
               _stderr += data;
             });
 

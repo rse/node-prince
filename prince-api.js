@@ -224,11 +224,11 @@ Prince.prototype.option = function (name, value, forced) {
 Prince.prototype.on = function (eventName, fn) {
     if (!this.eventHandlers.hasOwnProperty(eventName)) {
         throw new Error("Unknown event name. Event must be one of '"
-          + Object.keys(this.eventHandlers).join("', '") + "'");
+            + Object.keys(this.eventHandlers).join("', '") + "'");
     }
     var alreadyAdded = this.eventHandlers[eventName].indexOf(fn) > -1
     if (!alreadyAdded) {
-      this.eventHandlers[eventName].push(fn);
+        this.eventHandlers[eventName].push(fn);
     }
     return this;
 };
@@ -237,7 +237,7 @@ Prince.prototype.on = function (eventName, fn) {
 Prince.prototype.off = function (eventName, fn) {
     if (!this.eventHandlers.hasOwnProperty(eventName)) {
         throw new Error("Unknown event name. Event must be one of '"
-          + Object.keys(this.eventHandlers).join("', '") + "'");
+            + Object.keys(this.eventHandlers).join("', '") + "'");
     }
     var index = this.eventHandlers[eventName].indexOf(fn)
     this.eventHandlers[eventName].splice(index, 1)
@@ -277,39 +277,39 @@ Prince.prototype._execute = function (method, args) {
             var princeProcess = child_process.spawn(prog, args, options);
 
             function callLineByLine(eventName, fn, data) {
-              (""+data).split("\n").map(function(line) {
-                var stillRegistered = self.eventHandlers[eventName].indexOf(fn) > -1;
-                if (line && stillRegistered) {
-                  fn(line, self);
-                }
-              })
+                (""+data).split("\n").map(function(line) {
+                    var stillRegistered = self.eventHandlers[eventName].indexOf(fn) > -1;
+                    if (line && stillRegistered) {
+                        fn(line, self);
+                    }
+                })
             };
 
             princeProcess.stdout.on("data", function(data) {
-              self.eventHandlers.stdout.map(function(fn) {
-                callLineByLine('stdout', fn, data);
-              })
-              _stdout += data;
+                self.eventHandlers.stdout.map(function(fn) {
+                    callLineByLine('stdout', fn, data);
+                })
+                _stdout += data;
             });
 
             princeProcess.stderr.on("data", function(data) {
-              self.eventHandlers.stderr.map(function(fn) {
-                callLineByLine('stderr', fn, data);
-              });
-              _stderr += data;
+                self.eventHandlers.stderr.map(function(fn) {
+                    callLineByLine('stderr', fn, data);
+                });
+                _stderr += data;
             });
 
             princeProcess.on("error", function(err) {
-              reject({ error: err, stdout: _stdout, stderr: _stderr });
+                reject({ error: err, stdout: _stdout, stderr: _stderr });
             });
 
             princeProcess.on("close", function(code) {
-              if (code !== 0) {
-                var error = new Error("Prince process exited with status code: "+code);
-                error.code = code;
-                return reject({ error: error, stdout: _stdout, stderr: _stderr });
-              }
-              resolve({ stdout: _stdout, stderr: _stderr });
+                if (code !== 0) {
+                    var error = new Error("Prince process exited with status code: "+code);
+                    error.code = code;
+                    return reject({ error: error, stdout: _stdout, stderr: _stderr });
+                }
+                resolve({ stdout: _stdout, stderr: _stderr });
             });
         }
         catch (exception) {

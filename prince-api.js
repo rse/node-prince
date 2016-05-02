@@ -112,7 +112,7 @@ function Prince (options) {
 
 
     /* array for holding event handlers */
-    this.eventHandlers = [];
+    this.eventHandlers = {stdout: [], stderr: []};
 
     /*  override defaults with more reasonable information about environment  */
     var install = [
@@ -222,13 +222,13 @@ Prince.prototype.option = function (name, value, forced) {
 
 /*  register event handlers  */
 Prince.prototype.on = function (eventName, fn) {
-    var eventNames = ['stdout', 'stderr'];
-    if (eventNames.indexOf(eventName) === -1) {
-        throw new Error("Uknkown event name. Events must be one of '"+eventNames.join("', '")+"'");
+    if (Object.keys(this.eventHandlers).indexOf(eventName) === -1) {
+        throw new Error("Unknown event name. Event must be one of '"
+          + Object.keys(this.eventHandlers).join("', '") + "'");
     }
-    var eventHandler = {eventName: eventName, fn: fn}
-    if (this.eventHandlers.indexOf(eventHandler) === -1) {
-      this.eventHandlers.push(eventHandler);
+    var alreadyAdded = this.eventHandlers[eventName].indexOf(fn) > -1
+    if (!alreadyAdded) {
+      this.eventHandlers[eventName].push(fn);
     }
     return this;
 };
@@ -264,22 +264,26 @@ Prince.prototype._execute = function (method, args) {
             var _stdout = "";
             var _stderr = "";
             var princeProcess = child_process.spawn(prog, args, options);
-            var stdoutHandlers = self.eventHandlers.filter(function(eventHandler) { return eventHandler.eventName === 'stdout' })
-            var stderrHandlers = self.eventHandlers.filter(function(eventHandler) { return eventHandler.eventName === 'stderr' })
 
-            function handleData(handler) {
-              (""+this.data).split('\n').map(function(line) {
-                handler.fn(line);
+            function callLineByLine(fn, data) {
+              (""+data).split("\n").map(function(line) {
+                if (line) {
+                  fn(line);
+                }
               })
             };
 
             princeProcess.stdout.on("data", function(data) {
-              stdoutHandlers.map(handleData.bind({data: data}));
+              self.eventHandlers.stdout.map(function(fn) {
+                callLineByLine(fn, data);
+              })
               _stdout += data;
             });
 
             princeProcess.stderr.on("data", function(data) {
-              stderrHandlers.map(handleData.bind({data: data}));
+              self.eventHandlers.stderr.map(function(fn) {
+                callLineByLine(fn, data);
+              });
               _stderr += data;
             });
 

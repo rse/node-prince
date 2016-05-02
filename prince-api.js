@@ -233,6 +233,17 @@ Prince.prototype.on = function (eventName, fn) {
     return this;
 };
 
+/*  unregister event handlers  */
+Prince.prototype.off = function (eventName, fn) {
+    if (!this.eventHandlers.hasOwnProperty(eventName)) {
+        throw new Error("Unknown event name. Event must be one of '"
+          + Object.keys(this.eventHandlers).join("', '") + "'");
+    }
+    var index = this.eventHandlers[eventName].indexOf(fn)
+    this.eventHandlers[eventName].splice(index, 1)
+    return this;
+};
+
 /*  execute the CLI binary  */
 Prince.prototype._execute = function (method, args) {
     /*  determine path to prince(1) binary  */
@@ -265,24 +276,25 @@ Prince.prototype._execute = function (method, args) {
             var _stderr = "";
             var princeProcess = child_process.spawn(prog, args, options);
 
-            function callLineByLine(fn, data) {
+            function callLineByLine(eventName, fn, data) {
               (""+data).split("\n").map(function(line) {
-                if (line) {
-                  fn(line);
+                var stillRegistered = self.eventHandlers[eventName].indexOf(fn) > -1;
+                if (line && stillRegistered) {
+                  fn(line, self);
                 }
               })
             };
 
             princeProcess.stdout.on("data", function(data) {
               self.eventHandlers.stdout.map(function(fn) {
-                callLineByLine(fn, data);
+                callLineByLine('stdout', fn, data);
               })
               _stdout += data;
             });
 
             princeProcess.stderr.on("data", function(data) {
               self.eventHandlers.stderr.map(function(fn) {
-                callLineByLine(fn, data);
+                callLineByLine('stderr', fn, data);
               });
               _stderr += data;
             });

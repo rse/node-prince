@@ -80,7 +80,7 @@ var princeDownloadURL = function () {
         else if (id.match(/^(?:ia32|x64)-darwin/))
             resolve("http://www.princexml.com/download/prince-10r7-macosx.tar.gz");
         else {
-            child_process.exec("sh " + __dirname + "/shtool platform -t binary", function (error, stdout /*, stderr */) {
+            child_process.exec("sh \"" + __dirname + "/shtool\" platform -t binary", function (error, stdout /*, stderr */) {
                 if (error) {
                     console.log(chalk.red("ERROR: failed to determine platform details on platform \"" + id + "\": " + error));
                     process.exit(1);

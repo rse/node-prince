@@ -80,9 +80,9 @@ var princeDownloadURL = function () {
         else if (id.match(/^(?:ia32|x64)-darwin/))
             resolve("http://www.princexml.com/download/prince-10r7-macosx.tar.gz");
         else {
-            child_process.exec("sh " + __dirname + "/shtool platform -t binary", function (error, stdout /*, stderr */) {
+            child_process.exec("sh \"" + __dirname + "/shtool\" platform -t binary", function (error, stdout /*, stderr */) {
                 if (error) {
-                    console.log("ERROR: failed to determine platform details on platform \"" + id + "\"");
+                    console.log(chalk.red("ERROR: failed to determine platform details on platform \"" + id + "\": " + error));
                     process.exit(1);
                 }
                 var platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1");
@@ -132,7 +132,7 @@ var princeDownloadURL = function () {
                     resolve("http://www.princexml.com/download/prince-10r7-sol11x86.tar.gz");
                 }
                 else {
-                    console.log("ERROR: PrinceXML not available for platform \"" + platform + "\"");
+                    console.log(chalk.red("ERROR: PrinceXML not available for platform \"" + platform + "\""));
                     process.exit(1);
                 }
             });
@@ -211,7 +211,7 @@ var extractTarball = function (tarball, destdir, stripdirs) {
 
 /*  main procedure  */
 if (process.argv.length !== 3) {
-    console.log("ERROR: invalid number of arguments");
+    console.log(chalk.red("ERROR: invalid number of arguments"));
     process.exit(1);
 }
 var destdir;
@@ -271,14 +271,14 @@ else if (process.argv[2] === "uninstall") {
         console.log("++ deleting locally unpacked PrinceXML distribution");
         rimraf(destdir, function (error) {
             if (error !== null)
-                console.log("** ERROR: " + error);
+                console.log(chalk.red("** ERROR: " + error));
             else
                 console.log("-- OK: done");
         });
     }
 }
 else {
-    console.log("ERROR: invalid argument");
+    console.log(chalk.red("ERROR: invalid argument"));
     process.exit(1);
 }
 

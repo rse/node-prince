@@ -279,6 +279,10 @@ Prince.prototype.execute = function () {
     this.config.inputs.forEach(function (input) {
         args.push(input);
     });
+
+    /* required from v11 on, supported since v7 */
+    /* would require a version check */
+    args.push("--output");
     args.push(this.config.output);
 
     /*  return promise for executing CLI  */

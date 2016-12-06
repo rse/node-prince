@@ -280,8 +280,7 @@ Prince.prototype.execute = function () {
         args.push(input);
     });
 
-    /* required from v11 on, supported since v7 */
-    /* would require a version check */
+    /*  required from Prince 11 on, supported since Prince 7  */
     args.push("--output");
     args.push(this.config.output);
 

@@ -98,14 +98,15 @@ function Prince (options) {
 
     /*  create default configuration  */
     this.config = {
-        binary:  "prince",
-        prefix:  "",
-        license: "",
-        timeout: 10 * 1000,
-        cwd:     ".",
-        option:  {},
-        inputs:  [],
-        output:  ""
+        binary:    "prince",
+        prefix:    "",
+        license:   "",
+        timeout:   10 * 1000,
+        maxbuffer: 10 * 1024 * 1024,
+        cwd:       ".",
+        option:    {},
+        inputs:    [],
+        output:    ""
     };
 
     /*  override defaults with more reasonable information about environment  */
@@ -171,6 +172,14 @@ Prince.prototype.timeout = function (timeout) {
     if (arguments.length !== 1)
         throw new Error("Prince#timeout: invalid number of arguments");
     this.config.timeout = timeout;
+    return this;
+};
+
+/*  set maxmimum stdout/stderr buffer for CLI execution  */
+Prince.prototype.maxbuffer = function (maxbuffer) {
+    if (arguments.length !== 1)
+        throw new Error("Prince#maxbuffer: invalid number of arguments");
+    this.config.maxbuffer = maxbuffer;
     return this;
 };
 
@@ -240,6 +249,7 @@ Prince.prototype._execute = function (method, args) {
         try {
             var options = {};
             options.timeout = self.config.timeout;
+            options.maxbuffer = self.config.maxbuffer;
             options.cwd = self.config.cwd;
             child_process.execFile(prog, args, options,
                 function (error, stdout, stderr) {

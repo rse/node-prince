@@ -98,6 +98,10 @@ API
   The by default it is `10000` (10s).
   This returns the Prince API for further method chaining.
 
+- `Prince#maxbuffer(maxbuffer): Prince`: set the execution maximum stdout/stderr buffer size in bytes.
+  The by default it is `10485760` (10MB).
+  This returns the Prince API for further method chaining.
+
 - `Prince#cwd(dirname): Prince`: set the current working directory for execution.
   The by default it is `.` (current working directory).
   This returns the Prince API for further method chaining.

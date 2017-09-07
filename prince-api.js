@@ -111,7 +111,8 @@ function Prince (options) {
 
     /*  override defaults with more reasonable information about environment  */
     var install = [
-        { basedir: "prince/lib/prince",                     binary: "bin/prince"      },
+        { basedir: "lib/prince",                            binary: "bin/prince"      },
+        { basedir: "prince/lib/prince",                     binary: "bin/prince"      }, // maybe useless?
         { basedir: "prince\\program files\\Prince\\Engine", binary: "bin\\prince.exe" }
     ];
     var basedir;

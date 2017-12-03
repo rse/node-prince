@@ -87,7 +87,9 @@ var princeOptions = {
     "disallow-copy":     false,
     "disallow-annotate": false,
     "disallow-modify":   false,
-    "scanfonts":         false
+    "scanfonts":         false,
+    "structured-log":    false,
+    "debug":             false
 };
 
 /*  API constructor  */
@@ -108,6 +110,10 @@ function Prince (options) {
         inputs:    [],
         output:    ""
     };
+
+
+    /* array for holding event handlers */
+    this.eventHandlers = {stdout: [], stderr: []};
 
     /*  override defaults with more reasonable information about environment  */
     var install = [
@@ -223,6 +229,30 @@ Prince.prototype.option = function (name, value, forced) {
     return this;
 };
 
+/*  register event handlers  */
+Prince.prototype.on = function (eventName, fn) {
+    if (!this.eventHandlers.hasOwnProperty(eventName)) {
+        throw new Error("Unknown event name. Event must be one of '"
+            + Object.keys(this.eventHandlers).join("', '") + "'");
+    }
+    var alreadyAdded = this.eventHandlers[eventName].indexOf(fn) > -1
+    if (!alreadyAdded) {
+        this.eventHandlers[eventName].push(fn);
+    }
+    return this;
+};
+
+/*  unregister event handlers  */
+Prince.prototype.off = function (eventName, fn) {
+    if (!this.eventHandlers.hasOwnProperty(eventName)) {
+        throw new Error("Unknown event name. Event must be one of '"
+            + Object.keys(this.eventHandlers).join("', '") + "'");
+    }
+    var index = this.eventHandlers[eventName].indexOf(fn)
+    this.eventHandlers[eventName].splice(index, 1)
+    return this;
+};
+
 /*  execute the CLI binary  */
 Prince.prototype._execute = function (method, args) {
     /*  determine path to prince(1) binary  */
@@ -251,17 +281,46 @@ Prince.prototype._execute = function (method, args) {
             options.timeout = self.config.timeout;
             options.maxbuffer = self.config.maxbuffer;
             options.cwd = self.config.cwd;
-            child_process.execFile(prog, args, options,
-                function (error, stdout, stderr) {
-                    var m;
-                    if (error === null && (m = stderr.match(/prince:\s+error:\s+([^\n]+)/)))
-                        reject({ error: m[1], stdout: stdout, stderr: stderr });
-                    else if (error !== null)
-                        reject({ error: error, stdout: stdout, stderr: stderr });
-                    else
-                        resolve({ stdout: stdout, stderr: stderr });
+
+            var _stdout = "";
+            var _stderr = "";
+            var princeProcess = child_process.spawn(prog, args, options);
+
+            function callLineByLine(eventName, fn, data) {
+                (""+data).split("\n").map(function(line) {
+                    var stillRegistered = self.eventHandlers[eventName].indexOf(fn) > -1;
+                    if (line && stillRegistered) {
+                        fn(line, self);
+                    }
+                })
+            };
+
+            princeProcess.stdout.on("data", function(data) {
+                self.eventHandlers.stdout.map(function(fn) {
+                    callLineByLine('stdout', fn, data);
+                })
+                _stdout += data;
+            });
+
+            princeProcess.stderr.on("data", function(data) {
+                self.eventHandlers.stderr.map(function(fn) {
+                    callLineByLine('stderr', fn, data);
+                });
+                _stderr += data;
+            });
+
+            princeProcess.on("error", function(err) {
+                reject({ error: err, stdout: _stdout, stderr: _stderr });
+            });
+
+            princeProcess.on("close", function(code) {
+                if (code !== 0) {
+                    var error = new Error("Prince process exited with status code: "+code);
+                    error.code = code;
+                    return reject({ error: error, stdout: _stdout, stderr: _stderr });
                 }
-            );
+                resolve({ stdout: _stdout, stderr: _stderr });
+            });
         }
         catch (exception) {
             reject({ error: exception, stdout: "", stderr: "" });
@@ -300,4 +359,3 @@ Prince.prototype.execute = function () {
 
 /*  export API constructor  */
 module.exports = Prince;
-

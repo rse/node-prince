@@ -76,9 +76,9 @@ var princeDownloadURL = function () {
     return new promise(function (resolve /*, reject */) {
         var id = process.arch + "-" + process.platform;
         if (id.match(/^ia32-win32$/))
-            resolve("http://www.princexml.com/download/prince-11.3-win32-setup.exe");
+            resolve("http://www.princexml.com/download/prince-11.3.1-win32-setup.exe");
         else if (id.match(/^x64-win32$/))
-            resolve("http://www.princexml.com/download/prince-11.3-win64-setup.exe");
+            resolve("http://www.princexml.com/download/prince-11.3.1-win64-setup.exe");
         else if (id.match(/^(?:ia32|x64)-darwin/))
             resolve("http://www.princexml.com/download/prince-11.3-macosx.tar.gz");
         else {

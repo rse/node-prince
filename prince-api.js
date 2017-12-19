@@ -251,10 +251,14 @@ Prince.prototype._execute = function (method, args) {
             options.timeout = self.config.timeout;
             options.maxbuffer = self.config.maxbuffer;
             options.cwd = self.config.cwd;
+            if (self.config.output === '-') {
+              options.encoding = 'buffer';
+              options.maxBuffer = Infinity;
+            }
             child_process.execFile(prog, args, options,
                 function (error, stdout, stderr) {
                     var m;
-                    if (error === null && (m = stderr.match(/prince:\s+error:\s+([^\n]+)/)))
+                    if (error === null && (m = stderr.toString().match(/prince:\s+error:\s+([^\n]+)/)))
                         reject({ error: m[1], stdout: stdout, stderr: stderr });
                     else if (error !== null)
                         reject({ error: error, stdout: stdout, stderr: stderr });

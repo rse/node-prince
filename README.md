@@ -121,7 +121,9 @@ API
   the Prince API for further method chaining.
 
 - `Prince#execute(): Promise`: asynchronously execute the conversion
-  process. This returns a promise.
+  process. This returns a promise. On success it resolves to
+  an object with `stdout` and `stderr` fields. On error, it
+  resolves to an object with `error`, ` stdout` and `stderr` fields.
 
 See Also
 --------

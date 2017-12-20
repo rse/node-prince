@@ -248,9 +248,9 @@ Prince.prototype._execute = function (method, args) {
     return new promise(function (resolve, reject) {
         try {
             var options = {};
-            options.timeout = self.config.timeout;
-            options.maxbuffer = self.config.maxbuffer;
-            options.cwd = self.config.cwd;
+            options.timeout   = self.config.timeout;
+            options.maxBuffer = self.config.maxbuffer;
+            options.cwd       = self.config.cwd;
             child_process.execFile(prog, args, options,
                 function (error, stdout, stderr) {
                     var m;

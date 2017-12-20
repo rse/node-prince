@@ -46,6 +46,7 @@ var which         = require("which");
 var chalk         = require("chalk");
 var tar           = require("tar");
 var rimraf        = require("rimraf");
+var mkdirp        = require("mkdirp");
 
 /*  determine path and version of prince(1)  */
 var princeInfo = function () {
@@ -194,9 +195,9 @@ var extractTarball = function (tarball, destdir, stripdirs) {
     return new promise(function (resolve, reject) {
         fs.createReadStream(tarball)
             .pipe(zlib.createGunzip())
-            .pipe(tar.extract({ path: destdir, strip: stripdirs }))
+            .pipe(tar.extract({ cwd: destdir, strip: stripdirs }))
             .on("error", function (error) { reject(error); })
-            .on("end", function () { resolve(); });
+            .on("close", function () { setTimeout(function () { resolve(); }, 500); });
     });
 };
 
@@ -242,6 +243,7 @@ if (process.argv[2] === "install") {
                 else {
                     destfile = path.join(__dirname, "prince.tgz");
                     fs.writeFileSync(destfile, data, { encoding: null });
+                    mkdirp.sync(destdir);
                     extractTarball(destfile, destdir, 1).then(function () {
                         fs.unlinkSync(destfile);
                         console.log("-- OK: local PrinceXML installation now available");

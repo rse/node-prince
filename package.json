@@ -2,7 +2,7 @@
     "name":        "prince",
     "homepage":    "http://github.com/rse/node-prince",
     "description": "Node API for executing XML/HTML to PDF renderer PrinceXML via prince(1) CLI",
-    "version":     "1.4.4",
+    "version":     "1.4.6",
     "license":     "MIT",
     "author": {
         "name":    "Ralf S. Engelschall",
@@ -39,7 +39,7 @@
         "mkdirp":               "~0.5.1"
     },
     "engines": {
-        "node":                 ">=0.10.0"
+        "node":                 ">=4.0.0"
     },
     "scripts": {
         "install":   "node ./prince-npm.js install",

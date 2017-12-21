@@ -303,7 +303,7 @@ Prince.prototype.execute = function () {
     });
     this.config.cookies.forEach(function (cookie) {
         args.push("--cookie");
-        args.push(this.config.cookies[i]);
+        args.push(cookie);
     });
 
     /*  required from Prince 11 on, supported since Prince 7  */

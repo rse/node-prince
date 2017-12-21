@@ -106,6 +106,7 @@ function Prince (options) {
         cwd:       ".",
         option:    {},
         inputs:    [],
+        cookies:   [],
         output:    ""
     };
 
@@ -134,6 +135,8 @@ function Prince (options) {
             this.prefix(options.prefix);
         if (typeof options.inputs !== "undefined")
             this.inputs(options.inputs);
+        if (typeof options.cookies !== "undefined")
+            this.cookies(options.cookies);
         if (typeof options.output !== "undefined")
             this.output(options.output);
     }
@@ -198,6 +201,14 @@ Prince.prototype.inputs = function (inputs) {
     this.config.inputs = util.isArray(inputs) ? inputs : [ inputs ];
     return this;
 };
+
+/* set cookies */
+Prince.prototype.cookies = function (cookies) {
+    if (arguments.length !== 1)
+        throw new Error("Prince#inputs: invalid number of arguments");
+    this.config.cookies = util.isArray(cookies) ? cookies : [ cookies ];
+    return this;
+}
 
 /*  set output file  */
 Prince.prototype.output = function (output) {
@@ -289,6 +300,10 @@ Prince.prototype.execute = function () {
     });
     this.config.inputs.forEach(function (input) {
         args.push(input);
+    });
+    this.config.cookies.forEach(function (cookie) {
+        args.push("--cookie");
+        args.push(this.config.cookies[i]);
     });
 
     /*  required from Prince 11 on, supported since Prince 7  */

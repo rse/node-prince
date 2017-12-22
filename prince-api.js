@@ -208,7 +208,7 @@ Prince.prototype.cookies = function (cookies) {
         throw new Error("Prince#cookies: invalid number of arguments");
     this.config.cookies = util.isArray(cookies) ? cookies : [ cookies ];
     return this;
-}
+};
 
 /*  set output file  */
 Prince.prototype.output = function (output) {

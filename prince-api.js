@@ -202,7 +202,7 @@ Prince.prototype.inputs = function (inputs) {
     return this;
 };
 
-/* set cookie(s) */
+/*  set cookie(s)  */
 Prince.prototype.cookies = function (cookies) {
     if (arguments.length !== 1)
         throw new Error("Prince#cookies: invalid number of arguments");
@@ -301,7 +301,8 @@ Prince.prototype.execute = function () {
     this.config.inputs.forEach(function (input) {
         args.push(input);
     });
-    /* supported since Prince 10 */
+
+    /*  supported since Prince 10  */
     this.config.cookies.forEach(function (cookie) {
         args.push("--cookie");
         args.push(cookie);

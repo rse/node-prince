@@ -54,6 +54,7 @@ Usage
 
 ```js
 var Prince = require("prince");
+var util = require('util');
 
 Prince()
     .inputs("test.html")

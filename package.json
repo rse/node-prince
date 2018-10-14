@@ -22,19 +22,19 @@
     "main": "./prince-api.js",
     "devDependencies": {
         "grunt":                "1.0.3",
-        "grunt-cli":            "1.2.0",
-        "grunt-contrib-jshint": "1.1.0",
-        "grunt-contrib-clean":  "1.1.0",
+        "grunt-cli":            "1.3.1",
+        "grunt-contrib-jshint": "2.0.0",
+        "grunt-contrib-clean":  "2.0.0",
         "grunt-eslint":         "21.0.0"
     },
     "dependencies" : {
-        "promise":              "8.0.1",
-        "lodash":               "4.17.10",
+        "promise":              "8.0.2",
+        "lodash":               "4.17.11",
         "progress":             "2.0.0",
-        "request":              "2.87.0",
+        "request":              "2.88.0",
         "which":                "1.3.1",
         "chalk":                "2.4.1",
-        "tar":                  "4.4.4",
+        "tar":                  "4.4.6",
         "rimraf":               "2.6.2",
         "mkdirp":               "0.5.1"
     },

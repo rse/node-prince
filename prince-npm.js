@@ -90,11 +90,7 @@ var princeDownloadURL = function () {
                 }
                 var platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1");
                 if (id.match(/^(?:ia32|x64)-linux/)) {
-                    if (platform.match(/^ix86-ubuntu1[23](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-12.3-ubuntu12.04-i386.tar.gz");
-                    else if (platform.match(/^amd64-ubuntu1[23](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-12.3-ubuntu12.04-amd64.tar.gz");
-                    else if (platform.match(/^ix86-ubuntu1[45](?:\.\d+)*$/))
+                    if (platform.match(/^ix86-ubuntu1[45](?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-12.3-ubuntu14.04-i386.tar.gz");
                     else if (platform.match(/^amd64-ubuntu1[45](?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-12.3-ubuntu14.04-amd64.tar.gz");
@@ -110,14 +106,10 @@ var princeDownloadURL = function () {
                         resolve("https://www.princexml.com/download/prince-12.3-debian9.1-amd64.tar.gz");
                     else if (platform.match(/^amd64-debian8(?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-12.3-debian8.10-amd64.tar.gz");
-                    else if (platform.match(/^amd64-debian7(?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-12.3-debian7.4-amd64.tar.gz");
                     else if (platform.match(/^amd64-centos7(?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-12.3-centos7-x86_64.tar.gz");
                     else if (platform.match(/^amd64-centos6(?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-12.3-centos6-x86_64.tar.gz");
-                    else if (platform.match(/^ix86-centos6(?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-12.3-centos6-i386.tar.gz");
                     else if (id.match(/^ia32-/))
                         resolve("https://www.princexml.com/download/prince-12.3-linux-generic-i686.tar.gz");
                     else if (id.match(/^x64-/))

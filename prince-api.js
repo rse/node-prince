@@ -43,32 +43,32 @@ var _             = require("lodash");
 
 /*  the officially support options of prince(1)  */
 var princeOptions = {
-    "help":                     false
-    "version":                  false
-    "credits":                  false
-    "verbose":                  false
-    "debug":                    false
+    "help":                     false,
+    "version":                  false,
+    "credits":                  false,
+    "verbose":                  false,
+    "debug":                    false,
     "log":                      true,
-    "no-warn-css":              false
-    "no-warn-css-unknown":      false
-    "no-warn-css-unsupported":  false
+    "no-warn-css":              false,
+    "no-warn-css-unknown":      false,
+    "no-warn-css-unsupported":  false,
     "structured-log":           true,
     "input":                    true,
     "input-list":               true,
     "baseurl":                  true,
     "remap":                    true,
     "fileroot":                 true,
-    "xinclude":                 false
-    "xml-external-entities":    false
-    "no-local-files":           false
-    "no-network":               false
+    "xinclude":                 false,
+    "xml-external-entities":    false,
+    "no-local-files":           false,
+    "no-network":               false,
     "auth-user":                true,
     "auth-password":            true,
     "auth-server":              true,
     "auth-scheme":              true,
     "auth-method":              true,
     "auth":                     true,
-    "no-auth-preemptive":       false
+    "no-auth-preemptive":       false,
     "http-proxy":               true,
     "http-timeout":             true,
     "cookie":                   true,
@@ -81,44 +81,44 @@ var princeOptions = {
     "ssl-key-type":             true,
     "ssl-key-password":         true,
     "ssl-version":              true,
-    "insecure":                 false
-    "no-parallel-downloads":    false
-    "javascript":               false
+    "insecure":                 false,
+    "no-parallel-downloads":    false,
+    "javascript":               false,
     "script":                   true,
     "style":                    true,
     "media":                    true,
     "page-size":                true,
     "page-margin":              true,
-    "no-author-style":          false
-    "no-default-style":         false
+    "no-author-style":          false,
+    "no-default-style":         false,
     "output":                   true,
     "pdf-profile":              true,
     "pdf-xmp":                  true,
     "pdf-output-intent":        true,
     "pdf-lang":                 true,
     "attach":                   true,
-    "tagged-pdf":               false
-    "no-artificial-fonts":      false
-    "no-embed-fonts":           false
-    "no-subset-fonts":          false
-    "force-identity-encoding":  false
-    "no-compress":              false
-    "no-object-streams":        false
-    "convert-colors":           false
+    "tagged-pdf":               false,
+    "no-artificial-fonts":      false,
+    "no-embed-fonts":           false,
+    "no-subset-fonts":          false,
+    "force-identity-encoding":  false,
+    "no-compress":              false,
+    "no-object-streams":        false,
+    "convert-colors":           false,
     "fallback-cmyk-profile":    true,
     "pdf-title":                true,
     "pdf-subject":              true,
     "pdf-author":               true,
     "pdf-keywords":             true,
     "pdf-creator":              true,
-    "encrypt":                  false
+    "encrypt":                  false,
     "key-bits":                 true,
     "user-password":            true,
     "owner-password":           true,
-    "disallow-print":           false
-    "disallow-copy":            false
-    "disallow-annotate":        false
-    "disallow-modify":          false
+    "disallow-print":           false,
+    "disallow-copy":            false,
+    "disallow-annotate":        false,
+    "disallow-modify":          false,
     "raster-output":            true,
     "raster-format":            true,
     "raster-pages":             true,

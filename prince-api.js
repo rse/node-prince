@@ -338,6 +338,7 @@ Prince.prototype.execute = function () {
     this.config.inputs.forEach(function (input) {
         args.push(input);
     });
+    args.push('-o');
     args.push(this.config.output);
 
     /*  return promise for executing CLI  */

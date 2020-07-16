@@ -21,7 +21,7 @@
     },
     "main": "./prince-api.js",
     "devDependencies": {
-        "grunt":                "1.2.0",
+        "grunt":                "1.2.1",
         "grunt-cli":            "1.3.2",
         "grunt-contrib-jshint": "2.1.0",
         "grunt-contrib-clean":  "2.0.0",
@@ -29,7 +29,7 @@
     },
     "dependencies" : {
         "promise":              "8.1.0",
-        "lodash":               "4.17.15",
+        "lodash":               "4.17.19",
         "progress":             "2.0.3",
         "request":              "2.88.2",
         "which":                "2.0.2",

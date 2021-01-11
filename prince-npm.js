@@ -81,7 +81,7 @@ var princeDownloadURL = function () {
         else if (id.match(/^x64-win32$/))
             resolve("https://www.princexml.com/download/prince-13.6-win64-setup.exe");
         else if (id.match(/^(?:ia32|x64)-darwin/))
-            resolve("https://www.princexml.com/download/prince-13.6-macos.tar.gz");
+            resolve("https://www.princexml.com/download/prince-13.6-macos.zip");
         else {
             child_process.exec("sh \"" + __dirname + "/shtool\" platform -t binary", function (error, stdout /*, stderr */) {
                 if (error) {

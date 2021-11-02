@@ -39,7 +39,7 @@ module.exports = function (grunt) {
         },
         eslint: {
             options: {
-                configFile: "eslint.json"
+                overrideConfigFile: "eslint.json"
             },
             target: [ "prince-api.js", "prince-npm.js" ],
         },

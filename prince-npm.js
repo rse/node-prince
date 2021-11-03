@@ -77,11 +77,11 @@ var princeDownloadURL = function () {
     return new promise(function (resolve /*, reject */) {
         var id = process.arch + "-" + process.platform;
         if (id.match(/^ia32-win32$/))
-            resolve("https://www.princexml.com/download/prince-13.6-win32-setup.exe");
+            resolve("https://www.princexml.com/download/prince-14.2-win32-setup.exe");
         else if (id.match(/^x64-win32$/))
-            resolve("https://www.princexml.com/download/prince-13.6-win64-setup.exe");
+            resolve("https://www.princexml.com/download/prince-14.2-win64-setup.exe");
         else if (id.match(/^(?:ia32|x64)-darwin/))
-            resolve("https://www.princexml.com/download/prince-13.6-macos.zip");
+            resolve("https://www.princexml.com/download/prince-14.2-macos.zip");
         else {
             child_process.exec("sh \"" + __dirname + "/shtool\" platform -t binary", function (error, stdout /*, stderr */) {
                 if (error) {
@@ -91,40 +91,52 @@ var princeDownloadURL = function () {
                 var platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1");
                 if (id.match(/^(?:ia32|x64)-linux/)) {
                     if (platform.match(/^ix86-ubuntu1[45](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-ubuntu14.04-i386.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-ubuntu14.04-i386.tar.gz");
                     else if (platform.match(/^amd64-ubuntu1[45](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-ubuntu14.04-amd64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-ubuntu14.04-amd64.tar.gz");
                     else if (platform.match(/^ix86-ubuntu1[67](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-ubuntu16.04-i386.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-ubuntu16.04-i386.tar.gz");
                     else if (platform.match(/^amd64-ubuntu1[67](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-ubuntu16.04-amd64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-ubuntu16.04-amd64.tar.gz");
                     else if (platform.match(/^ix86-ubuntu1[89](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-ubuntu18.04-i386.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-ubuntu18.04-i386.tar.gz");
                     else if (platform.match(/^amd64-ubuntu1[89](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-ubuntu18.04-amd64.tar.gz");
-                    else if (platform.match(/^ix86-ubuntu2[01](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-ubuntu20.04-i386.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-ubuntu18.04-amd64.tar.gz");
                     else if (platform.match(/^amd64-ubuntu2[01](?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-ubuntu20.04-amd64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-ubuntu20.04-amd64.tar.gz");
                     else if (platform.match(/^amd64-debian10(?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-debian10-amd64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-debian10-amd64.tar.gz");
                     else if (platform.match(/^amd64-debian9(?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-debian9-amd64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-debian9-amd64.tar.gz");
                     else if (platform.match(/^amd64-debian8(?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-debian8-amd64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-debian8-amd64.tar.gz");
                     else if (platform.match(/^amd64-centos8(?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-centos8-x86_64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-centos8-x86_64.tar.gz");
                     else if (platform.match(/^amd64-centos7(?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-centos7-x86_64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-centos7-x86_64.tar.gz");
                     else if (platform.match(/^amd64-centos6(?:\.\d+)*$/))
-                        resolve("https://www.princexml.com/download/prince-13.6-centos6-x86_64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-centos6-x86_64.tar.gz");
+                    else if (platform.match(/^amd64-alpine3\.13(?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-14.2-alpine3.13-x86_64.tar.gz");
+                    else if (platform.match(/^amd64-alpine3\.12(?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-14.2-alpine3.12-x86_64.tar.gz");
+                    else if (platform.match(/^amd64-alpine3\.11(?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-14.2-alpine3.11-x86_64.tar.gz");
+                    else if (platform.match(/^amd64-alpine3\.10(?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-14.2-alpine3.10-x86_64.tar.gz");
+                    else if (platform.match(/^amd64-opensuse15.2(?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-14.2-opensuse15.2-x86_64.tar.gz");
+                    else if (platform.match(/^amd64-opensuse42.3(?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-14.2-opensuse42.3-x86_64.tar.gz");
                     else if (id.match(/^ia32-/))
-                        resolve("https://www.princexml.com/download/prince-13.6-linux-generic-i686.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-linux-generic-i686.tar.gz");
                     else if (id.match(/^x64-/))
-                        resolve("https://www.princexml.com/download/prince-13.6-linux-generic-x86_64.tar.gz");
+                        resolve("https://www.princexml.com/download/prince-14.2-linux-generic-x86_64.tar.gz");
                 }
-                else if (id.match(/^x64-freebsd/))
-                    resolve("https://www.princexml.com/download/prince-13.6-freebsd12.0-amd64.tar.gz");
+                else if (id.match(/^x64-freebsd12(?:\.\d+)*/))
+                    resolve("https://www.princexml.com/download/prince-14.2-freebsd12.0-amd64.tar.gz");
+                else if (id.match(/^x64-freebsd13(?:\.\d+)*/))
+                    resolve("https://www.princexml.com/download/prince-14.2-freebsd13.0-amd64.tar.gz");
                 else {
                     console.log(chalk.red("ERROR: PrinceXML not available for platform \"" + platform + "\""));
                     process.exit(1);

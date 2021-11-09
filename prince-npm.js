@@ -206,11 +206,11 @@ var downloadData = function (url) {
 };
 
 /*  extract a zipfile (*.zip)  */
-var extractZipfile = function (zipfile, destdir) {
+var extractZipfile = function (zipfile, stripdir, destdir) {
     return new promise(function (resolve, reject) {
         var zip = new streamzip({ file: zipfile });
         zip.on("ready", function () {
-            zip.extract("prince-14.2-macos", destdir, function (error) {
+            zip.extract(stripdir, destdir, function (error) {
                 zip.close();
                 if (error) {
                     reject(error);
@@ -276,7 +276,7 @@ if (process.argv[2] === "install") {
                     destfile = path.join(__dirname, "prince.zip");
                     fs.writeFileSync(destfile, data, { encoding: null });
                     mkdirp.sync(destdir);
-                    extractZipfile(destfile, destdir).then(function () {
+                    extractZipfile(destfile, "prince-14.2-macos", destdir).then(function () {
                         fs.unlinkSync(destfile);
                         console.log("-- OK: local PrinceXML installation now available");
                     }, function (error) {

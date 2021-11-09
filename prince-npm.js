@@ -45,6 +45,7 @@ var request       = require("request");
 var which         = require("which");
 var chalk         = require("chalk");
 var tar           = require("tar");
+var streamzip     = require("node-stream-zip");
 var rimraf        = require("rimraf");
 var mkdirp        = require("mkdirp");
 
@@ -204,6 +205,23 @@ var downloadData = function (url) {
     });
 };
 
+/*  extract a zipfile (*.zip)  */
+var extractZipfile = function (zipfile, destdir) {
+    return new promise(function (resolve, reject) {
+        var zip = new streamzip({ file: zipfile });
+        zip.on("ready", function () {
+            zip.extract("prince-14.2-macos", destdir, function (error) {
+                zip.close();
+                if (error) {
+                    reject(error);
+                } else {
+                    setTimeout(function () { resolve(); }, 500);
+                }
+            });
+        });
+    });
+};
+
 /*  extract a tarball (*.tar.gz)  */
 var extractTarball = function (tarball, destdir, stripdirs) {
     return new promise(function (resolve, reject) {
@@ -252,6 +270,17 @@ if (process.argv[2] === "install") {
                             fs.unlinkSync(destfile);
                             console.log("-- OK: local PrinceXML installation now available");
                         }
+                    });
+                }
+                else if (process.platform === "darwin") {
+                    destfile = path.join(__dirname, "prince.zip");
+                    fs.writeFileSync(destfile, data, { encoding: null });
+                    mkdirp.sync(destdir);
+                    extractZipfile(destfile, destdir).then(function () {
+                        fs.unlinkSync(destfile);
+                        console.log("-- OK: local PrinceXML installation now available");
+                    }, function (error) {
+                        console.log(chalk.red("** ERROR: failed to extract: " + error));
                     });
                 }
                 else {

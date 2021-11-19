@@ -113,6 +113,7 @@ API
 
 - `Prince#output(filename): Prince`: set the output PDF file.
   This returns the Prince API for further method chaining.
+  This is optional if the PrinceXML option `raster-output` is given.
 
 - `Prince#option(name, value[, forced]): Prince`: set a PrinceXML option
   name `name` to a value `value`. The API knows the officially supported

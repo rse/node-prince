@@ -348,8 +348,12 @@ Prince.prototype.execute = function () {
     });
 
     /*  required from Prince 11 on, supported since Prince 7  */
-    args.push("--output");
-    args.push(this.config.output);
+    if (this.config.output !== "") {
+        args.push("--output");
+        args.push(this.config.output);
+    }
+    else if (this.config.option["raster-output"] === undefined)
+        throw new Error("Prince#execute: require either \"output\" or \"raster-output\" options");
 
     /*  return promise for executing CLI  */
     return this._execute("execute", args);

@@ -277,8 +277,17 @@ if (process.argv[2] === "install") {
                     fs.writeFileSync(destfile, data, { encoding: null });
                     mkdirp.sync(destdir);
                     extractZipfile(destfile, "prince-14.2-macos", destdir).then(function () {
-                        fs.unlinkSync(destfile);
+                        console.log("++ making local prince binary executable");
+                        const binaryfile = path.join(destdir, "lib/prince/bin/prince");
+                        const chmod755 = fs.constants.S_IRWXU | fs.constants.S_IRGRP | fs.constants.S_IXGRP | fs.constants.S_IROTH | fs.constants.S_IXOTH;
+                        fs.chmodSync(binaryfile, chmod755);
+                        const newmode = fs.statSync(binaryfile).mode;
+                        if ((newmode & chmod755) === chmod755) {
                         console.log("-- OK: local PrinceXML installation now available");
+                        } else {
+                            console.log(chalk.red("** ERROR: failed to make local prince binary executable"));
+                        }
+                        fs.unlinkSync(destfile);
                     }, function (error) {
                         console.log(chalk.red("** ERROR: failed to extract: " + error));
                     });

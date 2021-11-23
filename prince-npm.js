@@ -83,6 +83,8 @@ var princeDownloadURL = function () {
             resolve("https://www.princexml.com/download/prince-14.2-win64-setup.exe");
         else if (id.match(/^(?:ia32|x64)-darwin/))
             resolve("https://www.princexml.com/download/prince-14.2-macos.zip");
+        else if (id.match(/^arm64-darwin/)) /* Prince does not have an ARM build yet, but the Intel version will work as long as Rosetta 2 is installed. Leave this condition here and replace with the ARM build when available. */
+            resolve("https://www.princexml.com/download/prince-14.2-macos.zip");
         else {
             child_process.exec("sh \"" + __dirname + "/shtool\" platform -t binary", function (error, stdout /*, stderr */) {
                 if (error) {

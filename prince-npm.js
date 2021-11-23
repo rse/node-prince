@@ -277,6 +277,8 @@ if (process.argv[2] === "install") {
                     fs.writeFileSync(destfile, data, { encoding: null });
                     mkdirp.sync(destdir);
                     extractZipfile(destfile, "prince-14.2-macos", destdir).then(function () {
+                        fs.chmodSync(path.join(destdir, "lib/prince/bin/prince"), fs.constants.S_IRWXU
+                            | fs.constants.S_IRGRP | fs.constants.S_IXGRP | fs.constants.S_IROTH | fs.constants.S_IXOTH);
                         fs.unlinkSync(destfile);
                         console.log("-- OK: local PrinceXML installation now available");
                     }, function (error) {

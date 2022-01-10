@@ -283,7 +283,7 @@ Prince.prototype._execute = function (method, args) {
                 return path.join(item, name);
             });
             for (var i = 0, len = p.length; i < len; i++)
-                if (fs.existsSync(p[i]))
+                if (fs.existsSync(p[i]) || fs.existsSync(p[i] + '.exe'))
                     return p[i];
             return undefined;
         };

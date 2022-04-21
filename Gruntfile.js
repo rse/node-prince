@@ -30,13 +30,6 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
-        jshint: {
-            options: {
-                jshintrc: "jshint.json"
-            },
-            "gruntfile": [ "Gruntfile.js" ],
-            "prince":    [ "prince-api.js", "prince-npm.js" ]
-        },
         eslint: {
             options: {
                 overrideConfigFile: "eslint.json"
@@ -49,6 +42,6 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask("default", [ "jshint", "eslint" ]);
+    grunt.registerTask("default", [ "eslint" ]);
 };
 

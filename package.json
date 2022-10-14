@@ -27,7 +27,7 @@
         "grunt-eslint":         "24.0.0"
     },
     "dependencies" : {
-        "promise":              "8.1.0",
+        "promise":              "8.2.0",
         "lodash":               "4.17.21",
         "progress":             "2.0.3",
         "request":              "2.88.2",

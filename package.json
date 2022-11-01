@@ -27,13 +27,13 @@
         "grunt-eslint":         "24.0.0"
     },
     "dependencies" : {
-        "promise":              "8.2.0",
+        "promise":              "8.3.0",
         "lodash":               "4.17.21",
         "progress":             "2.0.3",
         "request":              "2.88.2",
-        "which":                "2.0.2",
+        "which":                "3.0.0",
         "chalk":                "4.1.2",
-        "tar":                  "6.1.11",
+        "tar":                  "6.1.12",
         "node-stream-zip":      "1.15.0",
         "rimraf":               "3.0.2",
         "mkdirp":               "1.0.4"

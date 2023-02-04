@@ -130,6 +130,14 @@ var princeDownloadURL = function () {
                     else if (id.match(/^x64-/))
                         resolve("https://www.princexml.com/download/prince-15-linux-generic-x86_64.tar.gz");
                 }
+                else if (id.match(/^arm64-linux/)) {
+                    if (platform.match(/^arm64-ubuntu2[23](?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-15-ubuntu22.04-arm64.tar.gz");
+                    else if (platform.match(/^arm64-debian11(?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-15-debian11-arm64.tar.gz");
+                    else
+                        resolve("https://www.princexml.com/download/prince-15-linux-generic-aarch64.tar.gz");
+                }
                 else if (platform.match(/^amd64-freebsd12(?:\.\d+)*/))
                     resolve("https://www.princexml.com/download/prince-14.3-freebsd12.3-amd64.tar.gz");
                 else if (platform.match(/^amd64-freebsd13(?:\.\d+)*/))

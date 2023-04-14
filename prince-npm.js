@@ -52,7 +52,7 @@ var mkdirp        = require("mkdirp");
 /*  determine path and version of prince(1)  */
 var princeInfo = function () {
     return new promise(function (resolve, reject) {
-        which("prince").then((filename) => {
+        which("prince").then(function (filename) {
             child_process.execFile(filename, [ "--version" ], function (error, stdout, stderr) {
                 if (error !== null) {
                     reject("prince(1) failed on \"--version\": " + error);
@@ -311,11 +311,10 @@ else if (process.argv[2] === "uninstall") {
     destdir = path.join(__dirname, "prince");
     if (fs.existsSync(destdir)) {
         console.log("++ deleting locally unpacked PrinceXML distribution");
-        rimraf(destdir, function (error) {
-            if (error !== null)
-                console.log(chalk.red("** ERROR: " + error));
-            else
-                console.log("-- OK: done");
+        rimraf(destdir).then(function () {
+            console.log("-- OK: done");
+        }).catch(function (error) {
+            console.log(chalk.red("** ERROR: " + error));
         });
     }
 }

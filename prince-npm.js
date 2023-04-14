@@ -52,7 +52,7 @@ var mkdirp        = require("mkdirp");
 /*  determine path and version of prince(1)  */
 var princeInfo = function () {
     return new promise(function (resolve, reject) {
-        which("prince", function (filename) {
+        which("prince").then((filename) => {
             child_process.execFile(filename, [ "--version" ], function (error, stdout, stderr) {
                 if (error !== null) {
                     reject("prince(1) failed on \"--version\": " + error);

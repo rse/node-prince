@@ -36,7 +36,7 @@
         "tar":                  "6.1.13",
         "node-stream-zip":      "1.15.0",
         "rimraf":               "5.0.0",
-        "mkdirp":               "3.0.0"
+        "mkdirp":               "3.0.1"
     },
     "upd":                      [ "!chalk" ],
     "engines": {

@@ -24,18 +24,18 @@
         "grunt":                "1.6.1",
         "grunt-cli":            "1.4.3",
         "grunt-contrib-clean":  "2.0.1",
-        "grunt-eslint":         "24.1.0"
+        "grunt-eslint":         "24.3.0"
     },
     "dependencies" : {
         "promise":              "8.3.0",
         "lodash":               "4.17.21",
         "progress":             "2.0.3",
         "request":              "2.88.2",
-        "which":                "3.0.1",
+        "which":                "4.0.0",
         "chalk":                "4.1.2",
-        "tar":                  "6.1.14",
+        "tar":                  "6.1.15",
         "node-stream-zip":      "1.15.0",
-        "rimraf":               "5.0.0",
+        "rimraf":               "5.0.1",
         "mkdirp":               "3.0.1"
     },
     "upd":                      [ "!chalk" ],

@@ -162,7 +162,7 @@ var downloadData = function (url) {
             headers: {
                 "User-Agent": "node-prince (prince-npm.js:install)"
             },
-            responseType: 'arraybuffer',
+            responseType: "arraybuffer",
             onDownloadProgress: function(progressEvent) {
                 if (!progress_bar) {
                     progress_bar = new progress(
@@ -201,7 +201,7 @@ var downloadData = function (url) {
                     console.log("-- download: " + response.data.length + " bytes received.");
                     resolve(response.data);
                 }
-            }).catch(function(error) {
+            }).catch(function (error) {
                 reject("download failed: " + error);
             });
         });

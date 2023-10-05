@@ -166,12 +166,12 @@ var downloadData = function (url) {
             onDownloadProgress: function(progressEvent) {
                 if (!progress_bar) {
                     progress_bar = new progress(
-                        "-- download: [:bar] :percent (ETA: :etas)", {
-                            complete:   "#",
-                            incomplete: "=",
-                            width:      40,
-                            total:      progressEvent.total
-                        });
+                    "-- download: [:bar] :percent (ETA: :etas)", {
+                        complete:   "#",
+                        incomplete: "=",
+                        width:      40,
+                        total:      progressEvent.total
+                    });
                 }
                 progress_bar.tick(progressEvent.loaded);
             }
@@ -196,7 +196,6 @@ var downloadData = function (url) {
             }
         })).then(function () {
             console.log("-- download: " + url);
-
             axios(options).then(function (response) {
                 if (response.status === 200) {
                     console.log("-- download: " + response.data.length + " bytes received.");
@@ -280,7 +279,6 @@ if (process.argv[2] === "install") {
                     destfile = path.join(__dirname, "prince.zip");
                     fs.writeFileSync(destfile, data, { encoding: null });
                     mkdirp.sync(destdir);
-
                     extractZipfile(destfile, "prince-15-macos", destdir).then(function () {
                         fs.chmodSync(path.join(destdir, "lib/prince/bin/prince"), fs.constants.S_IRWXU
                             | fs.constants.S_IRGRP | fs.constants.S_IXGRP | fs.constants.S_IROTH | fs.constants.S_IXOTH);

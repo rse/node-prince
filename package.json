@@ -2,7 +2,7 @@
     "name":        "prince",
     "homepage":    "http://github.com/rse/node-prince",
     "description": "Node API for executing XML/HTML to PDF renderer PrinceXML via prince(1) CLI",
-    "version":     "1.9.14",
+    "version":     "1.9.15",
     "license":     "MIT",
     "author": {
         "name":    "Dr. Ralf S. Engelschall",
@@ -27,10 +27,10 @@
         "grunt-eslint":         "24.3.0"
     },
     "dependencies" : {
+        "axios":                "1.5.1",
         "promise":              "8.3.0",
         "lodash":               "4.17.21",
         "progress":             "2.0.3",
-        "request":              "2.88.2",
         "which":                "4.0.0",
         "chalk":                "4.1.2",
         "tar":                  "6.1.15",

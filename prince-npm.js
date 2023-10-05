@@ -209,22 +209,6 @@ var downloadData = function (url) {
             }).catch(function(error) {
                 reject("download failed: " + error);
             });
-
-            // var progress_bar = null;
-            // req.on("response", function (response) {
-            //     var len = parseInt(response.headers["content-length"], 10);
-            //     progress_bar = new progress(
-            //         "-- download: [:bar] :percent (ETA: :etas)", {
-            //         complete:   "#",
-            //         incomplete: "=",
-            //         width:      40,
-            //         total:      len
-            //     });
-            // });
-            // req.on("data", function (data) {
-            //     if (progress_bar !== null)
-            //         progress_bar.tick(data.length);
-            // });
         });
     });
 };

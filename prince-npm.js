@@ -286,13 +286,11 @@ if (process.argv[2] === "install") {
                     mkdirp.sync(destdir);
 
                     extractZipfile(destfile, "prince-15-macos", destdir).then(function () {
-                        console.log('Extracted');
                         fs.chmodSync(path.join(destdir, "lib/prince/bin/prince"), fs.constants.S_IRWXU
                             | fs.constants.S_IRGRP | fs.constants.S_IXGRP | fs.constants.S_IROTH | fs.constants.S_IXOTH);
                         fs.unlinkSync(destfile);
                         console.log("-- OK: local PrinceXML installation now available");
                     }, function (error) {
-                        console.log('MNOT Extracted');
                         console.log(chalk.red("** ERROR: failed to extract: " + error));
                     });
                 }

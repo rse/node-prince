@@ -41,7 +41,7 @@ var zlib          = require("zlib");
 /*  extra requirements  */
 var progress      = require("progress");
 var promise       = require("promise");
-var request       = require("request");
+var axios         = require("axios");
 var which         = require("which");
 var chalk         = require("chalk");
 var tar           = require("tar");
@@ -154,12 +154,26 @@ var princeDownloadURL = function () {
 /*  download data from URL  */
 var downloadData = function (url) {
     return new promise(function (resolve, reject) {
+        var progress_bar = null;
         var options = {
             method: "GET",
             url: url,
             encoding: null,
             headers: {
                 "User-Agent": "node-prince (prince-npm.js:install)"
+            },
+            responseType: 'arraybuffer',
+            onDownloadProgress: function(progressEvent) {
+                if (!progress_bar) {
+                    progress_bar = new progress(
+                        "-- download: [:bar] :percent (ETA: :etas)", {
+                            complete:   "#",
+                            incomplete: "=",
+                            width:      40,
+                            total:      progressEvent.total
+                        });
+                }
+                progress_bar.tick(progressEvent.loaded);
             }
         };
         (new promise(function (resolve /*, reject  */) {
@@ -182,28 +196,14 @@ var downloadData = function (url) {
             }
         })).then(function () {
             console.log("-- download: " + url);
-            var req = request(options, function (error, response, body) {
-                if (!error && response.statusCode === 200) {
-                    console.log("-- download: " + body.length + " bytes received.");
-                    resolve(body);
+
+            axios(options).then(function (response) {
+                if (response.status === 200) {
+                    console.log("-- download: " + response.data.length + " bytes received.");
+                    resolve(response.data);
                 }
-                else
-                    reject("download failed: " + error);
-            });
-            var progress_bar = null;
-            req.on("response", function (response) {
-                var len = parseInt(response.headers["content-length"], 10);
-                progress_bar = new progress(
-                    "-- download: [:bar] :percent (ETA: :etas)", {
-                    complete:   "#",
-                    incomplete: "=",
-                    width:      40,
-                    total:      len
-                });
-            });
-            req.on("data", function (data) {
-                if (progress_bar !== null)
-                    progress_bar.tick(data.length);
+            }).catch(function(error) {
+                reject("download failed: " + error);
             });
         });
     });
@@ -280,6 +280,7 @@ if (process.argv[2] === "install") {
                     destfile = path.join(__dirname, "prince.zip");
                     fs.writeFileSync(destfile, data, { encoding: null });
                     mkdirp.sync(destdir);
+
                     extractZipfile(destfile, "prince-15-macos", destdir).then(function () {
                         fs.chmodSync(path.join(destdir, "lib/prince/bin/prince"), fs.constants.S_IRWXU
                             | fs.constants.S_IRGRP | fs.constants.S_IXGRP | fs.constants.S_IROTH | fs.constants.S_IXOTH);

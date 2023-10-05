@@ -173,10 +173,6 @@ var downloadData = function (url) {
                             total:      progressEvent.total
                         });
                 }
-                const percentage = Math.round(
-                    (progressEvent.loaded * 100) / progressEvent.total
-                );
-
                 progress_bar.tick(progressEvent.loaded);
             }
         };

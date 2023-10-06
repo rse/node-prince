@@ -86,7 +86,7 @@ var princeDownloadURL = function () {
             /*  PrinceXML does not have an ARM64 build yet, but the Intel x64 version will
                 work just fine as long as Rosetta 2 is installed. Leave this condition here
                 and replace with the ARM64 build when it is available in the future.  */
-            resolve("https://www.princexml.com/download/prince-15-macos.zip");
+            resolve("https://www.princexml.com/download/prince-15.1-macos.zip");
         else {
             child_process.exec("sh \"" + __dirname + "/shtool\" platform -t binary", function (error, stdout /*, stderr */) {
                 if (error) {
@@ -280,8 +280,7 @@ if (process.argv[2] === "install") {
                     destfile = path.join(__dirname, "prince.zip");
                     fs.writeFileSync(destfile, data, { encoding: null });
                     mkdirp.sync(destdir);
-
-                    extractZipfile(destfile, "prince-15-macos", destdir).then(function () {
+                    extractZipfile(destfile, "prince-15.1-macos", destdir).then(function () {
                         fs.chmodSync(path.join(destdir, "lib/prince/bin/prince"), fs.constants.S_IRWXU
                             | fs.constants.S_IRGRP | fs.constants.S_IXGRP | fs.constants.S_IROTH | fs.constants.S_IXOTH);
                         fs.unlinkSync(destfile);

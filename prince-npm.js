@@ -162,16 +162,16 @@ var downloadData = function (url) {
             headers: {
                 "User-Agent": "node-prince (prince-npm.js:install)"
             },
-            responseType: 'arraybuffer',
+            responseType: "arraybuffer",
             onDownloadProgress: function(progressEvent) {
                 if (!progress_bar) {
                     progress_bar = new progress(
-                        "-- download: [:bar] :percent (ETA: :etas)", {
-                            complete:   "#",
-                            incomplete: "=",
-                            width:      40,
-                            total:      progressEvent.total
-                        });
+                    "-- download: [:bar] :percent (ETA: :etas)", {
+                        complete:   "#",
+                        incomplete: "=",
+                        width:      40,
+                        total:      progressEvent.total
+                    });
                 }
                 progress_bar.tick(progressEvent.loaded);
             }
@@ -196,13 +196,12 @@ var downloadData = function (url) {
             }
         })).then(function () {
             console.log("-- download: " + url);
-
             axios(options).then(function (response) {
                 if (response.status === 200) {
                     console.log("-- download: " + response.data.length + " bytes received.");
                     resolve(response.data);
                 }
-            }).catch(function(error) {
+            }).catch(function (error) {
                 reject("download failed: " + error);
             });
         });

@@ -2,7 +2,7 @@
     "name":        "prince",
     "homepage":    "http://github.com/rse/node-prince",
     "description": "Node API for executing XML/HTML to PDF renderer PrinceXML via prince(1) CLI",
-    "version":     "1.9.15",
+    "version":     "1.10.0",
     "license":     "MIT",
     "author": {
         "name":    "Dr. Ralf S. Engelschall",
@@ -33,9 +33,9 @@
         "progress":             "2.0.3",
         "which":                "4.0.0",
         "chalk":                "4.1.2",
-        "tar":                  "6.1.15",
+        "tar":                  "6.2.0",
         "node-stream-zip":      "1.15.0",
-        "rimraf":               "5.0.1",
+        "rimraf":               "5.0.5",
         "mkdirp":               "3.0.1"
     },
     "upd":                      [ "!chalk" ],

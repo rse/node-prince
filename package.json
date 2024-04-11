@@ -33,7 +33,7 @@
         "progress":             "2.0.3",
         "which":                "4.0.0",
         "chalk":                "4.1.2",
-        "tar":                  "6.2.0",
+        "tar":                  "6.2.1",
         "node-stream-zip":      "1.15.0",
         "rimraf":               "5.0.5",
         "mkdirp":               "3.0.1"

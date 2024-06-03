@@ -141,6 +141,8 @@ var princeDownloadURL = function () {
                         resolve("https://www.princexml.com/download/prince-15.2-debian12-arm64.tar.gz");
                     else if (platform.match(/^arm64-debian11(?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-15.2-debian11-arm64.tar.gz");
+                    else if (platform.match(/^aarch64-alpine[23](?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-15.2-linux-generic-aarch64-musl.tar.gz");
                     else
                         resolve("https://www.princexml.com/download/prince-15.2-linux-generic-aarch64.tar.gz");
                 }

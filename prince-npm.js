@@ -117,6 +117,8 @@ var princeDownloadURL = function () {
                         resolve("https://www.princexml.com/download/prince-15.2-almalinux9-x86_64.tar.gz");
                     else if (platform.match(/^amd64-almalinux8(?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-15.2-almalinux8-x86_64.tar.gz");
+                    else if (platform.match(/^amd64-alpine3\.19(?:\.\d+)*$/))
+                        resolve("https://www.princexml.com/download/prince-15.3-alpine3.19-x86_64.tar.gz");
                     else if (platform.match(/^amd64-alpine3\.18(?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-15.2-alpine3.18-x86_64.tar.gz");
                     else if (platform.match(/^amd64-alpine3\.17(?:\.\d+)*$/))

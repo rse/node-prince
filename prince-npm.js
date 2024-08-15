@@ -278,7 +278,7 @@ if (process.argv[2] === "install") {
                     destfile = path.join(__dirname, "prince.zip");
                     fs.writeFileSync(destfile, data, { encoding: null });
                     mkdirp.sync(destdir);
-                    extractZipfile(destfile, "prince-15.2-macos", destdir).then(function () {
+                    extractZipfile(destfile, "prince-15.4-macos", destdir).then(function () {
                         fs.chmodSync(path.join(destdir, "lib/prince/bin/prince"), fs.constants.S_IRWXU
                             | fs.constants.S_IRGRP | fs.constants.S_IXGRP | fs.constants.S_IROTH | fs.constants.S_IXOTH);
                         fs.unlinkSync(destfile);

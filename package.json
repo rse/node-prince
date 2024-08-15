@@ -27,7 +27,7 @@
         "grunt-eslint":         "25.0.0"
     },
     "dependencies" : {
-        "axios":                "1.7.3",
+        "axios":                "1.7.4",
         "promise":              "8.3.0",
         "lodash":               "4.17.21",
         "progress":             "2.0.3",

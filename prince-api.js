@@ -34,7 +34,7 @@
 /*  core requirements  */
 var child_process = require("child_process");
 var fs            = require("fs");
-var path          = require("path");til
+var path          = require("path");
 
 /*  extra requirements  */
 var promise       = require("promise");

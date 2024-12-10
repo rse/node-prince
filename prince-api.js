@@ -34,8 +34,7 @@
 /*  core requirements  */
 var child_process = require("child_process");
 var fs            = require("fs");
-var path          = require("path");
-var util          = require("util");
+var path          = require("path");til
 
 /*  extra requirements  */
 var promise       = require("promise");
@@ -237,7 +236,7 @@ Prince.prototype.cwd = function (cwd) {
 Prince.prototype.inputs = function (inputs) {
     if (arguments.length !== 1)
         throw new Error("Prince#inputs: invalid number of arguments");
-    this.config.inputs = util.isArray(inputs) ? inputs : [ inputs ];
+    this.config.inputs = Array.isArray(inputs) ? inputs : [ inputs ];
     return this;
 };
 
@@ -245,7 +244,7 @@ Prince.prototype.inputs = function (inputs) {
 Prince.prototype.cookies = function (cookies) {
     if (arguments.length !== 1)
         throw new Error("Prince#cookies: invalid number of arguments");
-    this.config.cookies = util.isArray(cookies) ? cookies : [ cookies ];
+    this.config.cookies = Array.isArray(cookies) ? cookies : [ cookies ];
     return this;
 };
 

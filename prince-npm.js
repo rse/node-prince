@@ -77,9 +77,9 @@ var princeDownloadURL = function () {
     return new promise(function (resolve /*, reject */) {
         var id = process.arch + "-" + process.platform;
         if (id.match(/^ia32-win32$/))
-            resolve("https://www.princexml.com/download/prince-15.4-win32-setup.exe");
-        else if (id.match(/^(?:x64|arm64)-win32$/))
-            resolve("https://www.princexml.com/download/prince-15.4-win64-setup.exe");
+            resolve("https://www.princexml.com/download/prince-16-win32.zip");
+        else if (id.match(/^(:?x64|arm64)-win32$/))
+            resolve("https://www.princexml.com/download/prince-16-win64.zip");
         else if (id.match(/^(?:x64|arm64)-darwin/))
             resolve("https://www.princexml.com/download/prince-16-macos.zip");
         else {
@@ -249,23 +249,15 @@ if (process.argv[2] === "install") {
                 destdir = path.join(__dirname, "prince");
                 var destfile;
                 if (process.platform === "win32") {
-                    destfile = path.join(__dirname, "prince.exe");
+                    destfile = path.join(__dirname, "prince.zip");
                     fs.writeFileSync(destfile, data, { encoding: null });
-                    var args = [ "/s", "/a", "/vTARGETDIR=\"" + path.resolve(destdir) + "\" /qn" ];
-                    child_process.execFile(destfile, args, function (error, stdout, stderr) {
-                        if (error !== null) {
-                            console.log(chalk.red("** ERROR: failed to extract: " + error));
-                            stdout = stdout.toString();
-                            stderr = stderr.toString();
-                            if (stdout !== "")
-                                console.log("** STDOUT: " + stdout);
-                            if (stderr !== "")
-                                console.log("** STDERR: " + stderr);
-                        }
-                        else {
-                            fs.unlinkSync(destfile);
-                            console.log("-- OK: local PrinceXML installation now available");
-                        }
+                    mkdirp.sync(destdir);
+                    var stripDir = process.arch == "ia32" ? "prince-16-win32" : "prince-16-win64";
+                    extractZipfile(destfile, stripDir, destdir).then(function () {
+                        fs.unlinkSync(destfile);
+                        console.log("-- OK: local PrinceXML installation now available");
+                    }, function (error) {
+                        console.log(chalk.red("** ERROR: failed to extract: " + error));
                     });
                 }
                 else if (process.platform === "darwin") {

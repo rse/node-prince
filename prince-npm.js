@@ -78,7 +78,7 @@ var princeDownloadURL = function () {
         var id = process.arch + "-" + process.platform;
         if (id.match(/^ia32-win32$/))
             resolve("https://www.princexml.com/download/prince-15.4-win32-setup.exe");
-        else if (id.match(/^x64-win32$/))
+        else if (id.match(/^(?:x64|arm64)-win32$/))
             resolve("https://www.princexml.com/download/prince-15.4-win64-setup.exe");
         else if (id.match(/^(?:x64|arm64)-darwin/))
             resolve("https://www.princexml.com/download/prince-16-macos.zip");

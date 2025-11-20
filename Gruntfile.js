@@ -24,8 +24,8 @@
 
 /* global module: true */
 module.exports = function (grunt) {
-    grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-eslint");
+    grunt.loadNpmTasks("grunt-contrib-clean")
+    grunt.loadNpmTasks("grunt-eslint")
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
@@ -39,8 +39,8 @@ module.exports = function (grunt) {
             clean: [],
             distclean: [ "node_modules" ]
         }
-    });
+    })
 
-    grunt.registerTask("default", [ "eslint" ]);
-};
+    grunt.registerTask("default", [ "eslint" ])
+}
 

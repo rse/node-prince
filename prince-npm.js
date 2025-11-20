@@ -63,7 +63,6 @@ var princeInfo = function () {
             });
         }).catch(function (error) {
             reject("prince(1) not found in PATH: " + error);
-            return;
         })
     });
 };

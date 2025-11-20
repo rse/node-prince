@@ -33,5 +33,5 @@ Prince()
         console.log("OK: done");
     }, function (error) {
         console.log("ERROR: ", util.inspect(error));
-    })
+    });
 

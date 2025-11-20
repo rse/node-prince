@@ -78,7 +78,7 @@ var princeDownloadURL = function () {
         else if (id.match(/^(?:x64|arm64)-darwin/))
             resolve("https://www.princexml.com/download/prince-16.1-macos.zip");
         else {
-            child_process.exec("sh \"" + __dirname + "/shtool\" platform -t binary", function (error, stdout /*, stderr */) {
+            child_process.execFile("sh", [ path.join(__dirname, "shtool"), "platform", "-t", "binary" ], function (error, stdout /*, stderr */) {
                 if (error) {
                     console.log(chalk.red("ERROR: failed to determine platform details on platform \"" + id + "\": " + error));
                     process.exit(1);

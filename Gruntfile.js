@@ -24,7 +24,6 @@
 
 /* global module: true */
 module.exports = function (grunt) {
-    grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-eslint");
 
@@ -32,9 +31,9 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON("package.json"),
         eslint: {
             options: {
-                overrideConfigFile: "eslint.json"
+                 overrideConfigFile: "eslint.config.js"
             },
-            target: [ "prince-api.js", "prince-npm.js" ],
+            target: [ "prince-api.js", "prince-npm.js" ]
         },
         clean: {
             clean: [],

@@ -22,10 +22,6 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-/* global process: false */
-/* global __dirname: false */
-/* global require: false */
-/* global console: false */
 /* eslint no-console: 0 */
 
 /*
@@ -239,7 +235,7 @@ var extractTarball = function (tarball, destdir, stripdirs) {
             .pipe(zlib.createGunzip())
             .pipe(tar.extract({ cwd: destdir, strip: stripdirs }))
             .on("error", function (error) { reject(error); })
-            .on("close", function () { /* global setTimeout: true */ setTimeout(function () { resolve(); }, 500); });
+            .on("close", function () { setTimeout(function () { resolve(); }, 500); });
     });
 };
 

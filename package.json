@@ -21,6 +21,7 @@
     },
     "main": "./prince-api.js",
     "devDependencies": {
+        "eslint":               "9.39.1",
         "grunt":                "1.6.1",
         "grunt-cli":            "1.5.0",
         "grunt-contrib-clean":  "2.0.1",

@@ -22,11 +22,6 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-/* global __dirname: false */
-/* global process: false */
-/* global module: false */
-/* global require: false */
-
 /*
  *  prince-api.js: Node run-time API
  */

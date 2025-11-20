@@ -27,15 +27,15 @@
         "grunt-eslint":         "26.0.0"
     },
     "dependencies" : {
-        "axios":                "1.12.1",
+        "axios":                "1.13.2",
         "promise":              "8.3.0",
         "lodash":               "4.17.21",
         "progress":             "2.0.3",
-        "which":                "5.0.0",
+        "which":                "6.0.0",
         "chalk":                "4.1.2",
-        "tar":                  "7.4.3",
+        "tar":                  "7.5.2",
         "node-stream-zip":      "1.15.0",
-        "rimraf":               "6.0.1",
+        "rimraf":               "6.1.2",
         "mkdirp":               "3.0.1"
     },
     "upd":                      [ "!chalk" ],

@@ -1,26 +1,15 @@
 {
-    "name":        "prince",
-    "homepage":    "http://github.com/rse/node-prince",
-    "description": "Node API for executing XML/HTML to PDF renderer PrinceXML via prince(1) CLI",
-    "version":     "1.14.0",
-    "license":     "MIT",
-    "author": {
-        "name":    "Dr. Ralf S. Engelschall",
-        "email":   "rse@engelschall.com",
-        "url":     "http://engelschall.com"
-    },
-    "keywords": [
-        "Prince", "PrinceXML", "CLI", "XML", "HTML", "PDF", "renderer", "API"
-    ],
-    "repository": {
-        "type": "git",
-        "url":  "git://github.com/rse/node-prince.git"
-    },
-    "bugs": {
-        "url":  "http://github.com/rse/node-prince"
-    },
-    "main":  "./prince-api.js",
-    "types": "./prince-api.d.ts",
+    "name":                     "prince",
+    "homepage":                 "http://github.com/rse/node-prince",
+    "description":              "Node API for executing XML/HTML to PDF renderer PrinceXML via prince(1) CLI",
+    "version":                  "1.14.0",
+    "license":                  "MIT",
+    "author":                   { "name": "Dr. Ralf S. Engelschall", "email": "rse@engelschall.com", "url": "http://engelschall.com" },
+    "keywords":                 [ "Prince", "PrinceXML", "CLI", "XML", "HTML", "PDF", "renderer", "API" ],
+    "repository":               { "type": "git", "url":  "git://github.com/rse/node-prince.git" },
+    "bugs":                     { "url":  "https://github.com/rse/node-prince" },
+    "main":                     "./prince-api.js",
+    "types":                    "./prince-api.d.ts",
     "devDependencies": {
         "eslint":               "9.39.1",
         "grunt":                "1.6.1",
@@ -28,7 +17,7 @@
         "grunt-contrib-clean":  "2.0.1",
         "grunt-eslint":         "26.0.0"
     },
-    "dependencies" : {
+    "dependencies": {
         "axios":                "1.13.2",
         "promise":              "8.3.0",
         "lodash":               "4.17.21",
@@ -45,8 +34,8 @@
         "node":                 ">=16.0.0"
     },
     "scripts": {
-        "install":   "node ./prince-npm.js install",
-        "uninstall": "node ./prince-npm.js uninstall",
-        "test":      "node ./test.js"
+        "install":              "node ./prince-npm.js install",
+        "uninstall":            "node ./prince-npm.js uninstall",
+        "test":                 "node ./test.js"
     }
 }

@@ -22,16 +22,16 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-var util   = require("util");
-var Prince = require("./prince-api.js");
+const util   = require("util")
+const Prince = require("./prince-api.js")
 
 Prince()
     .inputs("test.html")
     .output("test.pdf")
     .execute()
     .then(function () {
-        console.log("OK: done");
+        console.log("OK: done")
     }, function (error) {
-        console.log("ERROR: ", util.inspect(error));
-    });
+        console.log("ERROR: ", util.inspect(error))
+    })
 

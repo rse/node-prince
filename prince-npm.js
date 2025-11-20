@@ -29,24 +29,24 @@
  */
 
 /*  core requirements  */
-var child_process = require("child_process")
-var fs            = require("fs")
-var path          = require("path")
-var zlib          = require("zlib")
+const child_process = require("child_process")
+const fs            = require("fs")
+const path          = require("path")
+const zlib          = require("zlib")
 
 /*  extra requirements  */
-var progress      = require("progress")
-var promise       = require("promise")
-var axios         = require("axios")
-var which         = require("which")
-var chalk         = require("chalk")
-var tar           = require("tar")
-var streamzip     = require("node-stream-zip")
-var rimraf        = require("rimraf")
-var mkdirp        = require("mkdirp")
+const progress      = require("progress")
+const promise       = require("promise")
+const axios         = require("axios")
+const which         = require("which")
+const chalk         = require("chalk")
+const tar           = require("tar")
+const streamzip     = require("node-stream-zip")
+const rimraf        = require("rimraf")
+const mkdirp        = require("mkdirp")
 
 /*  determine path and version of prince(1)  */
-var princeInfo = function () {
+const princeInfo = function () {
     return new promise(function (resolve, reject) {
         which("prince").then(function (filename) {
             child_process.execFile(filename, [ "--version" ], function (error, stdout, stderr) {
@@ -54,7 +54,7 @@ var princeInfo = function () {
                     reject(`prince(1) failed on "--version": ${error}`)
                     return
                 }
-                var m = stdout.match(/^Prince\s+(\d+(?:\.\d+)?)/)
+                const m = stdout.match(/^Prince\s+(\d+(?:\.\d+)?)/)
                 if (m === null) {
                     reject(`prince(1) returned unexpected output on "--version":\n${stdout}${stderr}`)
                     return
@@ -68,9 +68,9 @@ var princeInfo = function () {
 }
 
 /*  return download URL for latest PrinceXML distribution  */
-var princeDownloadURL = function () {
+const princeDownloadURL = function () {
     return new promise(function (resolve /*, reject */) {
-        var id = `${process.arch}-${process.platform}`
+        const id = `${process.arch}-${process.platform}`
         if (id.match(/^ia32-win32$/))
             resolve("https://www.princexml.com/download/prince-16.1-win32.zip")
         else if (id.match(/^x64-win32$/))
@@ -83,7 +83,7 @@ var princeDownloadURL = function () {
                     console.log(chalk.red(`ERROR: failed to determine platform details on platform "${id}": ${error}`))
                     process.exit(1)
                 }
-                var platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1")
+                const platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1")
                 if (id.match(/^x64-linux/)) {
                     if (platform.match(/^amd64-ubuntu1[89](?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-16.1-ubuntu20.04-amd64.tar.gz")
@@ -154,10 +154,10 @@ var princeDownloadURL = function () {
 }
 
 /*  download data from URL  */
-var downloadData = function (url) {
+const downloadData = function (url) {
     return new promise(function (resolve, reject) {
-        var progress_bar = null
-        var options = {
+        let progress_bar = null
+        const options = {
             method: "GET",
             url: url,
             encoding: null,
@@ -211,9 +211,9 @@ var downloadData = function (url) {
 }
 
 /*  extract a zipfile (*.zip)  */
-var extractZipfile = function (zipfile, stripdir, destdir) {
+const extractZipfile = function (zipfile, stripdir, destdir) {
     return new promise(function (resolve, reject) {
-        var zip = new streamzip({ file: zipfile })
+        const zip = new streamzip({ file: zipfile })
         zip.on("ready", function () {
             zip.extract(stripdir, destdir, function (error) {
                 zip.close()
@@ -228,7 +228,7 @@ var extractZipfile = function (zipfile, stripdir, destdir) {
 }
 
 /*  extract a tarball (*.tar.gz)  */
-var extractTarball = function (tarball, destdir, stripdirs) {
+const extractTarball = function (tarball, destdir, stripdirs) {
     return new promise(function (resolve, reject) {
         fs.createReadStream(tarball)
             .pipe(zlib.createGunzip())
@@ -243,7 +243,7 @@ if (process.argv.length !== 3) {
     console.log(chalk.red("ERROR: invalid number of arguments"))
     process.exit(1)
 }
-var destdir
+let destdir
 if (process.argv[2] === "install") {
     /*  installation procedure  */
     console.log("++ checking for globally installed PrinceXML")
@@ -256,8 +256,8 @@ if (process.argv[2] === "install") {
             downloadData(url).then(function (data) {
                 console.log("++ locally unpacking PrinceXML distribution")
                 destdir = path.join(__dirname, "prince")
-                var destfile
-                var id = `${process.arch}-${process.platform}`
+                let destfile
+                const id = `${process.arch}-${process.platform}`
                 if (id.match(/^ia32-win32$/)) {
                     destfile = path.join(__dirname, "prince.zip")
                     fs.writeFileSync(destfile, data, { encoding: null })

@@ -27,16 +27,16 @@
  */
 
 /*  core requirements  */
-var child_process = require("child_process")
-var fs            = require("fs")
-var path          = require("path")
+const child_process = require("child_process")
+const fs            = require("fs")
+const path          = require("path")
 
 /*  extra requirements  */
-var promise       = require("promise")
-var _             = require("lodash")
+const promise       = require("promise")
+const _             = require("lodash")
 
 /*  the officially support options of prince(1)  */
-var princeOptions = {
+const princeOptions = {
     "help":                     false,
     "version":                  false,
     "credits":                  false,
@@ -144,13 +144,13 @@ function Prince (options) {
     }
 
     /*  override defaults with more reasonable information about environment  */
-    var install = [
+    const install = [
         { basedir: "prince/lib/prince", binary: "bin/prince"      },
         { basedir: "prince",            binary: "bin\\prince.exe" }
     ]
-    var basedir
-    var binary
-    for (var i = 0; i < install.length; i++) {
+    let basedir
+    let binary
+    for (let i = 0; i < install.length; i++) {
         basedir = path.resolve(path.join(__dirname, install[i].basedir))
         binary  = path.join(basedir, install[i].binary)
         if (fs.existsSync(binary)) {
@@ -270,13 +270,13 @@ Prince.prototype.option = function (name, value, forced) {
 /*  execute the CLI binary  */
 Prince.prototype._execute = function (method, args) {
     /*  determine path to prince(1) binary  */
-    var prog = this.config.binary
+    let prog = this.config.binary
     if (!fs.existsSync(prog)) {
-        var findInPath = function (name) {
-            var p = process.env.PATH.split(path.delimiter).map(function(item) {
+        const findInPath = function (name) {
+            const p = process.env.PATH.split(path.delimiter).map(function(item) {
                 return path.join(item, name)
             })
-            for (var i = 0, len = p.length; i < len; i++)
+            for (let i = 0, len = p.length; i < len; i++)
                 if (fs.existsSync(p[i]))
                     return p[i]
             return undefined
@@ -287,18 +287,18 @@ Prince.prototype._execute = function (method, args) {
     }
 
     /*  return promise for executing CLI  */
-    var self = this
+    const self = this
     return new promise(function (resolve, reject) {
         try {
-            var options = {}
+            const options = {}
             options.timeout   = self.config.timeout
             options.maxBuffer = self.config.maxbuffer
             options.cwd       = self.config.cwd
             options.encoding  = "buffer"
             child_process.execFile(prog, args, options,
                 function (error, stdout, stderr) {
-                    var m
-                    if (error === null && (m = stderr.toString().match(/prince:\s+error:\s+([^\n]+)/)))
+                    const m = stderr.toString().match(/prince:\s+error:\s+([^\n]+)/)
+                    if (error === null && m)
                         reject({ error: m[1], stdout: stdout, stderr: stderr })
                     else if (error !== null)
                         reject({ error: error, stdout: stdout, stderr: stderr })
@@ -316,7 +316,7 @@ Prince.prototype._execute = function (method, args) {
 /*  execute the CLI binary  */
 Prince.prototype.execute = function () {
     /*  determine arguments to prince(1) binary  */
-    var args = []
+    const args = []
     if (this.config.prefix !== "") {
         args.push("--prefix")
         args.push(this.config.prefix)

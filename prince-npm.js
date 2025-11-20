@@ -51,18 +51,18 @@ var princeInfo = function () {
         which("prince").then(function (filename) {
             child_process.execFile(filename, [ "--version" ], function (error, stdout, stderr) {
                 if (error !== null) {
-                    reject("prince(1) failed on \"--version\": " + error)
+                    reject(`prince(1) failed on "--version": ${error}`)
                     return
                 }
                 var m = stdout.match(/^Prince\s+(\d+(?:\.\d+)?)/)
                 if (m === null) {
-                    reject("prince(1) returned unexpected output on \"--version\":\n" + stdout + stderr)
+                    reject(`prince(1) returned unexpected output on "--version":\n${stdout}${stderr}`)
                     return
                 }
                 resolve({ command: filename, version: m[1] })
             })
         }).catch(function (error) {
-            reject("prince(1) not found in PATH: " + error)
+            reject(`prince(1) not found in PATH: ${error}`)
         })
     })
 }
@@ -70,7 +70,7 @@ var princeInfo = function () {
 /*  return download URL for latest PrinceXML distribution  */
 var princeDownloadURL = function () {
     return new promise(function (resolve /*, reject */) {
-        var id = process.arch + "-" + process.platform
+        var id = `${process.arch}-${process.platform}`
         if (id.match(/^ia32-win32$/))
             resolve("https://www.princexml.com/download/prince-16.1-win32.zip")
         else if (id.match(/^x64-win32$/))
@@ -80,7 +80,7 @@ var princeDownloadURL = function () {
         else {
             child_process.execFile("sh", [ path.join(__dirname, "shtool"), "platform", "-t", "binary" ], function (error, stdout /*, stderr */) {
                 if (error) {
-                    console.log(chalk.red("ERROR: failed to determine platform details on platform \"" + id + "\": " + error))
+                    console.log(chalk.red(`ERROR: failed to determine platform details on platform "${id}": ${error}`))
                     process.exit(1)
                 }
                 var platform = stdout.toString().replace(/^(\S+).*\n?$/, "$1")
@@ -145,7 +145,7 @@ var princeDownloadURL = function () {
                 else if (platform.match(/^amd64-freebsd13(?:\.\d+)*/))
                     resolve("https://www.princexml.com/download/prince-16.1-freebsd13.0-amd64.tar.gz")
                 else {
-                    console.log(chalk.red("ERROR: PrinceXML not available for platform \"" + platform + "\" (\"" + id + "\")"))
+                    console.log(chalk.red(`ERROR: PrinceXML not available for platform "${platform}" ("${id}")`))
                     process.exit(1)
                 }
             })
@@ -181,7 +181,7 @@ var downloadData = function (url) {
         (new promise(function (resolve /*, reject  */) {
             if (typeof process.env.http_proxy === "string" && process.env.http_proxy !== "") {
                 options.proxy = process.env.http_proxy
-                console.log("-- using proxy ($http_proxy): " + options.proxy)
+                console.log(`-- using proxy ($http_proxy): ${options.proxy}`)
                 resolve()
             }
             else {
@@ -190,21 +190,21 @@ var downloadData = function (url) {
                         stdout = stdout.toString().replace(/\r?\n$/, "")
                         if (stdout.match(/^https?:\/\/.+/)) {
                             options.proxy = stdout
-                            console.log("-- using proxy (npm config get proxy): " + options.proxy)
+                            console.log(`-- using proxy (npm config get proxy): ${options.proxy}`)
                         }
                     }
                     resolve()
                 })
             }
         })).then(function () {
-            console.log("-- download: " + url)
+            console.log(`-- download: ${url}`)
             axios(options).then(function (response) {
                 if (response.status === 200) {
-                    console.log("-- download: " + response.data.length + " bytes received.")
+                    console.log(`-- download: ${response.data.length} bytes received.`)
                     resolve(response.data)
                 }
             }).catch(function (error) {
-                reject("download failed: " + error)
+                reject(`download failed: ${error}`)
             })
         })
     })
@@ -248,8 +248,8 @@ if (process.argv[2] === "install") {
     /*  installation procedure  */
     console.log("++ checking for globally installed PrinceXML")
     princeInfo().then(function (prince) {
-        console.log("-- found prince(1) command: " + chalk.blue(prince.command))
-        console.log("-- found prince(1) version: " + chalk.blue(prince.version))
+        console.log(`-- found prince(1) command: ${chalk.blue(prince.command)}`)
+        console.log(`-- found prince(1) version: ${chalk.blue(prince.version)}`)
     }, function (/* error */) {
         console.log("++ downloading PrinceXML distribution")
         princeDownloadURL().then(function (url) {
@@ -257,7 +257,7 @@ if (process.argv[2] === "install") {
                 console.log("++ locally unpacking PrinceXML distribution")
                 destdir = path.join(__dirname, "prince")
                 var destfile
-                var id = process.arch + "-" + process.platform
+                var id = `${process.arch}-${process.platform}`
                 if (id.match(/^ia32-win32$/)) {
                     destfile = path.join(__dirname, "prince.zip")
                     fs.writeFileSync(destfile, data, { encoding: null })
@@ -268,7 +268,7 @@ if (process.argv[2] === "install") {
                         fs.unlinkSync(destfile)
                         console.log("-- OK: local PrinceXML installation now available")
                     }, function (error) {
-                        console.log(chalk.red("** ERROR: failed to extract: " + error))
+                        console.log(chalk.red(`** ERROR: failed to extract: ${error}`))
                     })
                 }
                 else if (id.match(/^x64-win32$/)) {
@@ -281,7 +281,7 @@ if (process.argv[2] === "install") {
                         fs.unlinkSync(destfile)
                         console.log("-- OK: local PrinceXML installation now available")
                     }, function (error) {
-                        console.log(chalk.red("** ERROR: failed to extract: " + error))
+                        console.log(chalk.red(`** ERROR: failed to extract: ${error}`))
                     })
                 }
                 else if (process.platform === "darwin") {
@@ -294,7 +294,7 @@ if (process.argv[2] === "install") {
                         fs.unlinkSync(destfile)
                         console.log("-- OK: local PrinceXML installation now available")
                     }, function (error) {
-                        console.log(chalk.red("** ERROR: failed to extract: " + error))
+                        console.log(chalk.red(`** ERROR: failed to extract: ${error}`))
                     })
                 }
                 else {
@@ -305,11 +305,11 @@ if (process.argv[2] === "install") {
                         fs.unlinkSync(destfile)
                         console.log("-- OK: local PrinceXML installation now available")
                     }, function (error) {
-                        console.log(chalk.red("** ERROR: failed to extract: " + error))
+                        console.log(chalk.red(`** ERROR: failed to extract: ${error}`))
                     })
                 }
             }, function (error) {
-                console.log(chalk.red("** ERROR: failed to download: " + error))
+                console.log(chalk.red(`** ERROR: failed to download: ${error}`))
             })
         })
     })
@@ -322,7 +322,7 @@ else if (process.argv[2] === "uninstall") {
         rimraf(destdir).then(function () {
             console.log("-- OK: done")
         }).catch(function (error) {
-            console.log(chalk.red("** ERROR: " + error))
+            console.log(chalk.red(`** ERROR: ${error}`))
         })
     }
 }

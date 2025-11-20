@@ -260,9 +260,9 @@ Prince.prototype.option = function (name, value, forced) {
     if (arguments.length < 3)
         forced = false
     if (!forced && typeof princeOptions[name] === "undefined")
-        throw new Error("Prince#option: invalid prince(1) option: \"" + name + "\" (but can be forced)")
+        throw new Error(`Prince#option: invalid prince(1) option: "${name}" (but can be forced)`)
     if (!forced && princeOptions[name] === true && arguments.length === 1)
-        throw new Error("Prince#option: prince(1) option \"" + name + "\" required argument")
+        throw new Error(`Prince#option: prince(1) option "${name}" required argument`)
     this.config.option[name] = value
     return this
 }
@@ -283,8 +283,7 @@ Prince.prototype._execute = function (method, args) {
         }
         prog = findInPath(prog)
         if (typeof prog === "undefined")
-            throw new Error("Prince#" + method + ": cannot resolve binary \"" +
-                this.config.binary + "\" to a filesystem path")
+            throw new Error(`Prince#${method}: cannot resolve binary "${this.config.binary}" to a filesystem path`)
     }
 
     /*  return promise for executing CLI  */
@@ -327,7 +326,7 @@ Prince.prototype.execute = function () {
         args.push(this.config.license)
     }
     _.forOwn(this.config.option, function (value, name) {
-        args.push("--" + name)
+        args.push(`--${name}`)
         if (value !== true)
             args.push(value)
     })

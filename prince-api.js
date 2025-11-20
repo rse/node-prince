@@ -211,7 +211,7 @@ Prince.prototype.timeout = function (timeout) {
     return this;
 };
 
-/*  set maxmimum stdout/stderr buffer for CLI execution  */
+/*  set maximum stdout/stderr buffer for CLI execution  */
 Prince.prototype.maxbuffer = function (maxbuffer) {
     if (arguments.length !== 1)
         throw new Error("Prince#maxbuffer: invalid number of arguments");

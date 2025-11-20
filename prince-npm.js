@@ -111,7 +111,7 @@ var princeDownloadURL = function () {
                         resolve("https://www.princexml.com/download/prince-16.1-alpine3.19-x86_64.tar.gz");
                     else if (platform.match(/^amd64-alpine3\.18(?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-16.1-alpine3.18-x86_64.tar.gz");
-                    else if (platform.match(/^amd64-opensuse15.6(?:\.\d+)*$/))
+                    else if (platform.match(/^amd64-opensuse15\.6(?:\.\d+)*$/))
                         resolve("https://www.princexml.com/download/prince-16.1-opensuse15.6-x86_64.tar.gz");
                     else if (id.match(/^x64-/))
                         resolve("https://www.princexml.com/download/prince-16.1-linux-generic-x86_64.tar.gz");

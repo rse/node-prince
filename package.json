@@ -19,7 +19,8 @@
     "bugs": {
         "url":  "http://github.com/rse/node-prince"
     },
-    "main": "./prince-api.js",
+    "main":  "./prince-api.js",
+    "types": "./prince-api.d.ts",
     "devDependencies": {
         "eslint":               "9.39.1",
         "grunt":                "1.6.1",

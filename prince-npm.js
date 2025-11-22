@@ -178,7 +178,7 @@ const downloadData = function (url) {
                 progress_bar.tick(progressEvent.loaded)
             }
         }
-        (new promise(function (resolve /*, reject  */) {
+        ;(new promise(function (resolve /*, reject  */) {
             if (typeof process.env.http_proxy === "string" && process.env.http_proxy !== "") {
                 options.proxy = process.env.http_proxy
                 console.log(`-- using proxy ($http_proxy): ${options.proxy}`)

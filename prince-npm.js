@@ -75,6 +75,8 @@ const princeDownloadURL = function () {
             resolve("https://www.princexml.com/download/prince-16.2-win32.zip")
         else if (id.match(/^x64-win32$/))
             resolve("https://www.princexml.com/download/prince-16.2-win64.zip")
+        else if (id.match(/^arm64-win32$/))
+            resolve("https://www.princexml.com/download/prince-16.2-win-arm64.zip")
         else if (id.match(/^(?:x64|arm64)-darwin/))
             resolve("https://www.princexml.com/download/prince-16.2-macos.zip")
         else {
@@ -277,7 +279,7 @@ if (process.argv[2] === "install") {
                         console.log(chalk.red(`** ERROR: failed to extract: ${error}`))
                     })
                 }
-                else if (id.match(/^x64-win32$/)) {
+                else if (id.match(/^(?:x64|arm64)-win32$/)) {
                     destfile = path.join(__dirname, "prince.zip")
                     fs.writeFileSync(destfile, data, { encoding: null })
                     mkdirp.sync(destdir)
